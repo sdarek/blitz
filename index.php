@@ -1,3 +1,3 @@
 <?php
 
-echo "Elo 32s0";
+echo "Elo 32COss0";

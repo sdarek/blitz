@@ -1,0 +1,66 @@
+/* Resetowanie stylów */
+html, body, div, p, a, img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Ustawienie obrazu tła na całą szerokość ekranu */
+.main-container {
+    background-image: url(../img/srodki2.png); /* Ścieżka do obrazu tła */
+    background-position: center; /* Pozycja obrazu tła */
+    background-size: cover; /* Rozmiar tła (aby wypełnić całą szerokość ekranu) */
+    background-repeat: no-repeat; /* Nie powtarzaj tła */
+    height: 100vh; /* Wysokość ekranu */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff; /* Kolor tekstu na tle obrazu */
+}
+
+/* Styl dla napisu głównego */
+.headline {
+    color: #ffffff;
+    font-family: "Lato-ExtraBold", Helvetica;
+    font-size: 96px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    text-align: center;
+    text-shadow: 1px 2px 4px #00000040;
+}
+
+/* Styl dla menu i ikon użytkownika oraz koszyka */
+.nav-links, .user-cart-icons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    margin-right: 20px; /* Margines odstępu między menu a ikonami */
+}
+
+.nav-link {
+    color: #ffffff;
+    font-family: "Lato-Bold", Helvetica;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 20px; /* Marginesy poziome dla pozycji w menu */
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #0084a2;
+}
+
+.user-icon, .cart-icon {
+    height: 88px;
+    width: 88px;
+    margin: 0 10px; /* Marginesy poziome między ikonami */
+}

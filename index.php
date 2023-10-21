@@ -1,3 +1,7 @@
 <?php
+// Wczytaj zawartość home.html
+$content = file_get_contents('./public/views/home.html');
 
-echo "Elo 32CssOss0";
+// Wyświetl zawartość
+echo $content;
+?>

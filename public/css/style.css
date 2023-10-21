@@ -4,63 +4,464 @@ html, body, div, p, a, img {
     padding: 0;
     border: 0;
     font: inherit;
+    font-family: "Lato-Bold", Helvetica;
     text-decoration: none;
     list-style: none;
 }
 
 /* Ustawienie obrazu tła na całą szerokość ekranu */
 .main-container {
-    background-image: url(../img/srodki2.png); /* Ścieżka do obrazu tła */
-    background-position: center; /* Pozycja obrazu tła */
-    background-size: cover; /* Rozmiar tła (aby wypełnić całą szerokość ekranu) */
-    background-repeat: no-repeat; /* Nie powtarzaj tła */
-    height: 100vh; /* Wysokość ekranu */
+    background-image: url(../img/background.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #ffffff; /* Kolor tekstu na tle obrazu */
+    color: #ffffff;
+    position: relative;
 }
 
+.main-container::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.5); /* Przyciemnione tło */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Wysunięte na tył */
+}
 /* Styl dla napisu głównego */
-.headline {
-    color: #ffffff;
-    font-family: "Lato-ExtraBold", Helvetica;
-    font-size: 96px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: normal;
+
+.overlap-wrapper {
+    width: 100%;
+    height: 50vh; /* Połowa wysokości ekranu */
+    background: linear-gradient(rgba(21, 126, 158, 0.0), rgba(0, 0, 0, 0.8), rgba(21, 126, 158, 0.0));
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    text-shadow: 1px 2px 4px #00000040;
+}
+
+.headline {
+    text-align: center;
+    font-size: 70px;
+    color: #fff; /* Biały kolor tekstu */
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.text-part-1 {
+    background-clip: text;
+    -webkit-background-clip: text;
+    display: inline-block;
+    font-size: 80px; /* Zwiększ rozmiar tekstu */
+    font-weight: bold; /* Dodaj większą wagę (grubszą czcionkę) */
+    letter-spacing: 10px; /* Dodaj większe odstępy między literami */
+}
+
+.text-part-2 {
+    background-clip: text;
+    -webkit-background-clip: text;
+    display: inline-block;
+    font-size: 60px; /* Zwiększ rozmiar tekstu */
+    letter-spacing: 1px; /* Dodaj większe odstępy między literami */
+}
+
+.scroll-down-icon {
+    text-align: center;
+    margin-top: 40px; /* Dostosuj margines, aby ustawić odstęp od tekstu */
+}
+
+.scroll-down-icon i {
+    font-size: 46px;
+    color: #fff; /* Kolor ikony */
+    animation: bounce 2s infinite; /* Dodaj animację bounce */
+    cursor: pointer;
 }
 
 /* Styl dla menu i ikon użytkownika oraz koszyka */
-.nav-links, .user-cart-icons {
+.menu-bar {
+    position: fixed;
+    width: 100%;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    z-index: 1;
+}
+
+.menu-left{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-right {
+    width: 10%
+}
+
+.logo-container {
     display: flex;
     align-items: center;
 }
 
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0px;
+}
+
+.logo-title {
+    font-size: 28px;
+    letter-spacing: 10px;
+    text-align: center;
+    margin: 0;
+}
+
+.logo-subtitle {
+    font-size: 15px;
+    font-weight: normal; /* Usunięcie pogrubienia */
+    margin: 0;
+    white-space: nowrap; /* Zapobiega zawijaniu tekstu */
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.menu-center {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
 .nav-links {
-    margin-right: 20px; /* Margines odstępu między menu a ikonami */
+    display: flex;
 }
 
 .nav-link {
     color: #ffffff;
     font-family: "Lato-Bold", Helvetica;
-    font-size: 36px;
-    font-weight: 700;
-    margin: 0 20px; /* Marginesy poziome dla pozycji w menu */
+    font-size: 24px;
+    font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
     transition: color 0.3s;
+    margin: 0 15px;
 }
+
+
 
 .nav-link:hover {
     color: #0084a2;
 }
 
+.user-cart-icons {
+    display: flex;
+    align-items: center;
+}
+
 .user-icon, .cart-icon {
-    height: 88px;
-    width: 88px;
-    margin: 0 10px; /* Marginesy poziome między ikonami */
+    height: 40px;
+    width: 40px;
+    margin: 0 10px;
+}
+
+/* Styl dla sekcji "Informacje" */
+#informacje {
+    background-color: #d6d8da;
+    padding: 50px;
+}
+
+.info-container {
+    text-align: justify;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.info-container h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.info-container p {
+    font-size: 18px;
+}
+
+/* Styl dla sekcji "Kontakt" */
+#kontakt {
+    background-color: #0084a2;
+    color: #fff;
+    padding: 50px;
+}
+
+.contact-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-container h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.contact-container p {
+    font-size: 18px;
+}
+
+.contact-container form {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.contact-container form label {
+    display: block;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.contact-container form input,
+.contact-container form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.contact-container form button {
+    background-color: #fff;
+    color: #0084a2;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.contact-container form button:hover {
+    background-color: #555;
+    color: #fff;
+}
+/* Styl dla stopki */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.footer-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav li {
+    margin-right: 20px;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+.footer-social {
+    margin-top: 20px;
+}
+
+.footer-social a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    margin-right: 20px;
+}
+/* Responsywność dla smartfonów (maksymalna szerokość ekranu 911px) */
+@media (max-width: 911px) {
+    .nav-link {
+        font-size: 20px; /* Zmniejsz rozmiar czcionki na smartfonach */
+    }
+    .menu-center, .nav-links {
+        width: 0; /* Ustaw szerokość na 0 */
+        display: none; /* Ukryj element */
+    }
+    
+    .menu-bar {
+        justify-content: space-between;
+        padding: 20px 0;
+        overflow: hidden;
+    }
+
+    .menu-button, .menu-left, .menu-right {
+        width: 25%; /* Przydziel każdemu 25% szerokości */
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu-button {
+        font-size: 36px; /* Zwiększ rozmiar przycisku menu */
+        cursor: pointer; /* Dodaj wskaźnik myszki */
+    }
+
+    .menu-left img {
+        height: 50px; /* Powiększ rozmiar logo */
+        width: auto; /* Automatyczny rozmiar szerokości */
+    }
+
+    .user-cart-icons img {
+        height: 50px; /* Powiększ rozmiar ikon */
+        width: 50px;
+    }
+
+    .user-icon:last-child, .cart-icon:last-child {
+        margin-right: 0; /* Usuń margines od prawej strony ostatnich ikon */
+    }
+
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 90px; /* Wartość zależy od wysokości menu-bar */
+        background-color: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        text-align: center;
+        z-index: 2; /* Wysunięte na wierzch */
+        max-height: 0; /* Ukryj menu na początek */
+        overflow: hidden; /* Ukryj zawartość, która wykracza poza maksymalną wysokość */
+        transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out; /* Dodaj animację */
+    }
+
+    .mobile-link {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 600;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 20px;
+        transition: background-color 0.3s; 
+    }
+
+    .mobile-link:hover {
+        background-color: #0084a2; /* Kolor podświetlenia po najechaniu myszką */
+    }
+
+    .mobile-menu.active {
+        max-height: 500px; /* Rozwiń menu, ustalając maksymalną wysokość */
+        opacity: 1; /* Ustal przejrzystość */
+        margin: 0;
+    }
+}
+
+
+
+
+/* Dla szerokości ekranu większej lub równej 911px */
+@media (min-width: 911px) {
+    .mobile-menu {
+        display: none;
+    }
+    .menu-button {
+        display: none; /* Ukryj przycisk rozwijania menu */
+    }
+
+    .menu-bar {
+        justify-content: space-between;
+        padding: 15px 0;
+    }
+
+    .menu-left{
+        width: 30%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .menu-right {
+        width: 10%
+    }
+
+    .logo {
+        height: 48px; /* Powiększ rozmiar logo */
+        width: auto;
+        filter: brightness(0) invert(1);
+    }
+
+    .menu-center {
+        width: 60%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-links {
+        display: flex;
+    }
+
+    .nav-link {
+        font-size: 24px;
+        margin: 0 15px;
+    }
+
+    .user-icon, .cart-icon {
+        height: 48px; /* Powiększ rozmiar ikon */
+        width: 48px;
+        margin: 0 10px;
+    }
+}
+
+/* Dla szerokości ekranu mniejszej lub równej 1200px */
+@media (max-width: 1250px) {
+    .nav-link {
+        font-size: 20px; /* Zmniejsz rozmiar pozycji menu, ikon i logo */
+        margin: 0 5px;
+    }
+    .user-icon, .cart-icon, .logo {
+        height: 35px;
+        margin: 0 5px;
+    }
+}
+
+@media (min-width: 1251px) {
+    .menu-left, .menu-right {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(10px); /* Skok w dół */
+    }
+    60% {
+        transform: translateY(5px); /* Skok w górę */
+    }
 }

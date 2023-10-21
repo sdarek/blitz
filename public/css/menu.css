@@ -1,0 +1,104 @@
+/* menu.css */
+
+/* Resetowanie stylów */
+html, body, div, p, a, img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-family: "Lato-Bold", Helvetica;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Styl dla menu i ikon użytkownika oraz koszyka */
+.menu-bar {
+    position: fixed;
+    width: 100%;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    z-index: 1;
+}
+
+.menu-left {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-right {
+    width: 10%;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0px;
+}
+
+.logo-title {
+    font-size: 28px;
+    letter-spacing: 10px;
+    text-align: center;
+    margin: 0;
+}
+
+.logo-subtitle {
+    font-size: 15px;
+    font-weight: normal; /* Usunięcie pogrubienia */
+    margin: 0;
+    white-space: nowrap; /* Zapobiega zawijaniu tekstu */
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.menu-center {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-link {
+    color: #ffffff;
+    font-family: "Lato-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    margin: 0 15px;
+}
+
+.nav-link:hover {
+    color: #0084a2;
+}
+
+.user-cart-icons {
+    display: flex;
+    align-items: center;
+}
+
+.user-icon, .cart-icon {
+    height: 40px;
+    width: 40px;
+    margin: 0 10px;
+}

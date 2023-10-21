@@ -58,8 +58,8 @@
                             <span class="text-part-2">W JEDNYM KLIKNIĘCIU</span>
                         </h1>
                     </div>
-                    <div class="scroll-down-icon">
-                        <i class="fas fa-chevron-down"></i>
+                    <div class="scroll-down-icon" id="scroll-down-icon">
+                        <i class="fas fa-chevron-down" ></i>
                     </div>
                 </div>
             </div>
@@ -67,15 +67,30 @@
     </section>
     <section id="informacje">
         <div class="info-container">
-            <h2>POZNAJ WYŻSZĄ JAKOŚĆ
-                CZYSTOŚCI</h2>
-            
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in tincidunt turpis, at blandit lorem. Ut orci felis, consequat ut mattis nec, dictum ac lacus. Nulla non mollis dolor. Phasellus elit orci, dignissim eget mauris at, porta faucibus sem. Aliquam pellentesque dapibus lacus at mollis. Nam quis hendrerit ante. Sed ut magna nec lorem ultricies dapibus. Duis rhoncus est ex, blandit malesuada ipsum pulvinar et. Nullam mi dui, convallis eget sapien ut, tempus efficitur velit. Vestibulum mattis congue libero eu fermentum. Cras efficitur dapibus lorem nec consectetur. Nullam maximus sit amet purus sodales gravida.</p>
-            <p>Cras elementum ultrices diam, et porta velit venenatis sed. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae varius lorem, a faucibus nisl. Vestibulum ac libero erat. Aliquam mattis mauris in placerat laoreet. Nulla et interdum metus.</p>
-            <p>Nulla congue lectus et lectus lacinia dictum. Vivamus eget sagittis arcu, vitae pulvinar est. Maecenas velit tortor, ultricies ut neque ac, tempor ullamcorper eros. Donec iaculis tellus in tellus feugiat tincidunt. In nec hendrerit nisl, ac commodo nunc. Vivamus eget ultrices felis. Donec sed neque egestas velit consectetur feugiat sed at lacus. Vivamus sed gravida magna. Mauris tempus lacinia justo et luctus. Vestibulum eu quam eget nisl facilisis bibendum. Donec nec lobortis nisl, sit amet vestibulum mi. Maecenas et porta diam. Curabitur faucibus sem erat, non semper turpis luctus eu. Fusce id dapibus metus. Nam volutpat feugiat lobortis. Nunc pulvinar ut massa vel pretium.</p>
-            <p>Vivamus laoreet sit amet lacus sit amet eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur quis ex eu dolor ullamcorper lacinia nec quis leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin in sodales odio, non accumsan enim. Cras nisl velit, semper vitae ex sed, posuere cursus lacus. Aenean lobortis massa a ante rhoncus consequat. Vestibulum dolor magna, porta at quam vitae, maximus maximus eros. Quisque a ante ultricies leo ultrices bibendum at vel sapien. Suspendisse venenatis lacinia ligula, eu convallis justo dapibus in. Donec venenatis est ac erat volutpat, in rutrum metus placerat. Morbi justo dolor, pellentesque at diam nec, rutrum gravida tortor. Sed eu arcu fermentum, feugiat tortor eu, mattis urna.</p>
-            <p>Morbi viverra tortor id quam feugiat imperdiet. Nulla justo nulla, suscipit et posuere non, tincidunt ut ex. Maecenas bibendum orci a nisl bibendum, et finibus tortor congue. Aliquam iaculis orci et pulvinar luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur mattis maximus mauris, eget aliquet libero pharetra a. Pellentesque porta sem leo, a convallis odio blandit ut. Vestibulum luctus semper nisi, vel varius nisi lobortis a. Nam porttitor tincidunt dolor vitae ultrices.</p>
-            
+            <h2>POZNAJ WYŻSZĄ JAKOŚĆ CZYSTOŚCI</h2>
+            <p>Witaj na naszej stronie, gdzie znajdziesz najlepsze produkty do utrzymania czystości w swoim domu i nie tylko. Nasze produkty gwarantują świeżość w jednym kliknięciu.</p>
+            <a href="#" class="shop-button">Przejdź do witryny sklepowej</a>
+    
+            <div class="product-carousel">
+                <div class="product-container">
+                    <div class="left-arrow arrow" onclick="showPrevProduct()">&#9665;</div>
+                    <img src="../img/placeholder-image1.jpg" alt="Produkt 1">
+                    <h3>Produkt 1</h3>
+                    <p>Opis produktu 1.</p>
+                </div>
+                <div class="product-container">
+                    <img src="../img/placeholder-image1.jpg" alt="Produkt 1">
+                    <h3>Produkt 1</h3>
+                    <p>Opis produktu 1.</p>
+                </div>
+                <div class="product-container">
+                    <img src="../img/placeholder-image1.jpg" alt="Produkt 1">
+                    <h3>Produkt 1</h3>
+                    <p>Opis produktu 1.</p>
+                    <div class="right-arrow arrow" onclick="showNextProduct()">&#9655;</div>
+                </div>
+                <!-- Dodaj kolejne produkty w odpowiednich kontenerach .product-container -->
+            </div>
         </div>
     </section>
     <section id="kontakt">
@@ -121,5 +136,51 @@
         </div>
     </footer>
     
+    <script>
+        // Pobranie wszystkich przycisków nawigacyjnych
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Dla każdego przycisku nawigacyjnego dodaj obsługę zdarzenia kliknięcia
+        navLinks.forEach(link => {
+        link.addEventListener('click', scrollToSection);
+        });
+
+        // Obsługa zdarzenia kliknięcia na przycisk nawigacyjny
+        function scrollToSection(event) {
+        event.preventDefault();
+
+        // Pobranie atrybutu href przycisku nawigacyjnego
+        const targetId = this.getAttribute('href').substring(1); // Usunięcie znaku #
+
+        // Pobranie elementu docelowego
+        const targetElement = document.getElementById(targetId);
+
+        // Płynne przewinięcie do elementu docelowego
+        if (targetElement) {
+            window.scrollTo({
+            top: targetElement.offsetTop,
+            behavior: 'smooth'
+            });
+        }
+        }
+    </script>
+    <script>
+        // Pobranie ikony "scroll down"
+        const scrollDownIcon = document.getElementById('scroll-down-icon');
+
+        // Obsługa zdarzenia kliknięcia na ikonę "scroll down"
+        scrollDownIcon.addEventListener('click', scrollToInformacje);
+
+        // Funkcja przewijania do sekcji "Informacje"
+        function scrollToInformacje() {
+            const informacjeSection = document.getElementById('informacje');
+            if (informacjeSection) {
+                window.scrollTo({
+                    top: informacjeSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    </script>
 </body>
 </html>

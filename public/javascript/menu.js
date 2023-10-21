@@ -11,3 +11,4 @@ function toggleMobileMenu() {
         menuButton.innerHTML = '<i class="fas fa-bars"></i>';
     }
 }
+

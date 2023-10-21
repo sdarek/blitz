@@ -186,7 +186,7 @@ html, body, div, p, a, img {
 
 .info-container {
     text-align: justify;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -194,10 +194,109 @@ html, body, div, p, a, img {
     text-align: center;
     font-size: 36px;
     margin-bottom: 20px;
+    color: #333;
 }
 
 .info-container p {
     font-size: 18px;
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: 20px;
+}
+/* Styl kontenera dla karuzeli produktów */
+.product-carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Styl kontenera dla pojedynczego produktu */
+.product-container {
+    flex: 0 0 33.33%; /* Każdy produkt zajmuje 33.33% szerokości (aby wyświetlić trzy obok siebie) */
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative; /* Dodaj pozycję względną, aby móc pozycjonować strzałki wewnątrz */
+}
+
+/* Styl obrazu produktu */
+.product-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Styl tytułu produktu */
+.product-container h3 {
+    margin: 10px 0;
+    font-size: 18px; /* Zwiększenie rozmiaru czcionki */
+}
+
+/* Styl opisu produktu */
+.product-container p {
+    font-size: 14px;
+}
+
+/* Styl dla strzałki "w lewo" */
+.left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: background-color 0.3s; /* Efekt zmiany koloru */
+}
+
+/* Styl dla strzałki "w prawo" */
+.right-arrow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: background-color 0.3s; /* Efekt zmiany koloru */
+}
+
+/* Zmiana koloru strzałek na hover */
+.left-arrow:hover,
+.right-arrow:hover {
+    background-color: #ff6600;
+}
+
+/* Aktualizacja stylów dla przycisku Witryna Sklepowa */
+.shop-button {
+    display: inline-block;
+    padding: 15px 30px; /* Zwiększenie rozmiaru przycisku */
+    background-color: #ff6600;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px; /* Zwiększenie rozmiaru czcionki */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center; /* Wysrodkowanie tekstu */
+    margin: 0 auto; /* Centralizacja przycisku */
+    display: block; /* Aby zachować marginesy po bokach */
+    width: fit-content; /* Dostosowanie szerokości do zawartości */
+}
+
+.shop-button:hover {
+    background-color: #ff3300;
 }
 
 /* Styl dla sekcji "Kontakt" */

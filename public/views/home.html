@@ -7,6 +7,8 @@
     <title>Blitz - Strona Główna</title>
     <meta name="description" content="Opis...................."/>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/menu.css">
+    <link rel="stylesheet" type="text/css" href="../css/effects.css">
     <script src="../javascript/menu.js"></script> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
@@ -18,8 +20,10 @@
                     <i class="fas fa-bars"></i>
                 </div>
                 <div class="menu-left">
-                    <div class="logo-container">
-                        <img class="logo" src="../img/logo.png" alt="Logo">
+                    <div class="logo-container" id="home-logo">
+                        <a href="home.html"> 
+                            <img class="logo" src="../img/logo.png" alt="Logo">
+                        </a>
                         <div class="logo-text">
                             <h1 class="logo-title">BLITZ</h1>
                             <p class="logo-subtitle">CHEMIA PROFESJONALNA</p>
@@ -29,7 +33,7 @@
                 <div class="menu-center">
                     <div class="nav-links">
                         <a class="nav-link" href="#home">HOME</a>
-                        <a class="nav-link" href="#sklep">SKLEP</a>
+                        <a class="nav-link" href="./shop.html">SKLEP</a>
                         <a class="nav-link" href="#informacje">INFORMACJE</a>
                         <a class="nav-link" href="#kontakt">KONTAKT</a>
                         <a class="nav-link" href="#wyszukiwanie">WYSZUKIWANIE</a>
@@ -44,7 +48,7 @@
             </div>
             <nav class="mobile-menu" id="mobile-menu">
                 <a class="mobile-link" href="#home">HOME</a>
-                <a class="mobile-link" href="#sklep">SKLEP</a>
+                <a class="mobile-link" href="shop.html">SKLEP</a>
                 <a class="mobile-link" href="#informacje">INFORMACJE</a>
                 <a class="mobile-link" href="#kontakt">KONTAKT</a>
                 <a class="mobile-link" href="#wyszukiwanie">WYSZUKIWANIE</a>
@@ -89,8 +93,9 @@
                     <p>Opis produktu 1.</p>
                     <div class="right-arrow arrow" onclick="showNextProduct()">&#9655;</div>
                 </div>
-                <!-- Dodaj kolejne produkty w odpowiednich kontenerach .product-container -->
             </div>
+            <p>Nunc sed convallis nulla, eget viverra sapien. Pellentesque cursus aliquam odio vitae accumsan. Nunc nec molestie nisi. Mauris commodo felis et ante volutpat mattis. Pellentesque nisi arcu, scelerisque ut enim eu, scelerisque faucibus libero. Vestibulum malesuada neque vehicula enim pellentesque, cursus ultrices massa lobortis. Vivamus venenatis eros ut diam sagittis ultrices. Nullam non purus id nulla sodales eleifend eu non mauris.</p>
+            
         </div>
     </section>
     <section id="kontakt">
@@ -181,6 +186,21 @@
                 });
             }
         }
+
+
+        // Pobranie przycisku "Sklep"
+        const shopButton = document.querySelector('.nav-link[href="./shop.html"]');
+
+        // Obsługa zdarzenia kliknięcia na przycisk "Sklep"
+        shopButton.addEventListener('click', () => {
+            // Dodaj efekt rozwijania przy opuszczaniu strony
+            document.querySelector('#home').classList.add('page-leave-active');
+            setTimeout(() => {
+                window.location.href = './shop.html'; // Przekierowanie do strony "shop.html"
+            }, 300); // Czas animacji (0.3s)
+        });
+
+
     </script>
 </body>
 </html>

@@ -1,0 +1,178 @@
+/* Resetowanie stylów */
+html, body, div, p, a, img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-family: "Lato-Bold", Helvetica;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Styl dla sekcji kategorii */
+#product-categories {
+    position: fixed;
+    width: 20%;
+    height: calc(100% - 80px); /* Odejmujemy wysokość menu */
+    background: #07628b;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    top: 80px; /* Ustaw odległość od góry na wysokość menu */
+}
+
+
+.category {
+    text-align: center;
+}
+
+.category h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.category li {
+    margin-bottom: 5px;
+}
+
+.category a {
+    text-decoration: none;
+    color: #dbdbdb;
+    display: block;
+    padding: 8px 0;
+    font-size: 1.2em;
+    transition: color 0.2s, #222 0.3s; /* Dodaj efekty przejścia dla kategorii */
+}
+
+.category a:hover {
+    color: #fff;
+}
+
+/* Styl podkategorii */
+.category ul ul {
+    margin-left: 20px;
+    display: none;
+    background: #222; /* Zmiana koloru tła dla podkategorii */
+    border-left: 4px solid #0fa866; /* Oznaczenie aktywnych kategorii */
+    padding-left: 16px;
+    opacity: 0; /* Ukryj początkowo podkategorie */
+    transition: opacity 0.5s; /* Dodaj efekt fade-in */
+}
+
+.category ul ul li {
+    margin-bottom: 5px;
+}
+
+.category ul ul a {
+    display: block;
+    padding: 8px 0;
+    color: #dbdbdb;
+    font-size: 1em;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.category ul ul a:hover {
+    color: #fff;
+}
+
+.category li:hover ul {
+    display: block;
+    opacity: 1; /* Wyświetl podkategorie z efektem fade-in */
+}
+/* Styl dla sekcji produktów */
+#product-sections {
+    position: fixed;
+    width: 80%;
+    margin-left: 20%;
+    margin-right: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    top: 80px; /* Ustaw odległość od góry na wysokość menu */
+    text-align: center;
+    overflow-y: auto; /* Dodaj przewijanie tylko dla sekcji produktów */
+    height: calc(100% - 80px); /* Określ wysokość sekcji produktów */
+}
+/* Przyklejenie paska przewijania do prawej strony */
+::-webkit-scrollbar {
+    width: 12px; /* Szerokość paska przewijania */
+}
+
+/* Stylowanie koloru paska przewijania */
+::-webkit-scrollbar-thumb {
+    background: #0084a2; /* Kolor paska przewijania */
+}
+
+/* Przyklejenie paska przewijania wertykalnego do prawej strony */
+::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+/* Przyklejenie paska przewijania poziomego do dolnej strony */
+::-webkit-scrollbar:horizontal {
+    height: 12px;
+}
+
+
+.product-section {
+    margin-bottom: 40px;
+    clear: both;
+}
+
+.product-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product-carousel {
+    display: flex;
+    flex-wrap: wrap; /* Wyśrodkuj produkty w kontenerze */
+    justify-content: space-between; /* Dodaj odstęp między produktami */
+    gap: 20px; /* Dodaj odstęp między produktami */
+    overflow: hidden; /* Ukryj pasek przewijania wewnątrz kontenera */
+}
+
+.product {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.product h3 {
+    font-size: 1.2em;
+    margin: 5px 0;
+    color: #333;
+}
+
+.product p {
+    font-size: 1em;
+    color: #777;
+}
+
+.product img {
+    max-width: 100%;
+}
+
+.carousel-arrows {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.carousel-arrows button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 10px;
+}

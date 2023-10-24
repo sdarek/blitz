@@ -1,4 +1,5 @@
 /* Resetowanie stylów */
+
 html, body, div, p, a, img {
     margin: 0;
     padding: 0;
@@ -134,91 +135,147 @@ html, body, div, p, a, img {
     border: 1px solid #fff; /* Dodaj obramowanie */
     height: auto;
 }
+/* Styl dla menu użytkownika */
+.user-menu {
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    top: 82px;
+    right: 0;
+    z-index: 2;
+    width: 25%; /* Szerokość menu użytkownika na pełną szerokość */
+    text-align: center; /* Wyśrodkuj tekst w menu */
+    opacity: 0; /* Rozpocznij z przeźroczystością 0 */
+    transition: opacity 0.5s ease-in-out;
+}
+.login-container {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+    padding: 20px;
+}
 
-/* Responsywność dla smartfonów (maksymalna szerokość ekranu 911px) */
-@media (max-width: 911px) {
-    .nav-link {
-        font-size: 20px; /* Zmniejsz rozmiar czcionki na smartfonach */
-    }
-    .menu-center, .nav-links {
-        width: 0; /* Ustaw szerokość na 0 */
-        display: none; /* Ukryj element */
-    }
-    
-    .menu-bar {
-        justify-content: space-between;
-        padding: 20px 0;
-        overflow: hidden;
-    }
+.login-container h1 {
+    color: #333;
+}
 
-    .menu-button, .menu-left, .menu-right {
-        width: 25%; /* Przydziel każdemu 25% szerokości */
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.login-container .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    .menu-button {
-        font-size: 36px; /* Zwiększ rozmiar przycisku menu */
-        cursor: pointer; /* Dodaj wskaźnik myszki */
-    }
+.login-container label {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555;
+}
 
-    .menu-left img {
-        height: 50px; /* Powiększ rozmiar logo */
-        width: auto; /* Automatyczny rozmiar szerokości */
-    }
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 
-    .user-cart-icons img {
-        height: 50px; /* Powiększ rozmiar ikon */
-        width: 50px;
-    }
+.login-container button {
+    background-color: #0084a2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
 
-    .user-icon:last-child, .cart-icon:last-child {
-        margin-right: 0; /* Usuń margines od prawej strony ostatnich ikon */
-    }
+.login-container button:hover {
+    background-color: #00657d;
+}
 
-    .mobile-menu {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 90px; /* Wartość zależy od wysokości menu-bar */
-        background-color: rgba(0, 0, 0, 0.7);
-        width: 100%;
-        text-align: center;
-        z-index: 2; /* Wysunięte na wierzch */
-        max-height: 0; /* Ukryj menu na początek */
-        overflow: hidden; /* Ukryj zawartość, która wykracza poza maksymalną wysokość */
-        transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out; /* Dodaj animację */
-    }
+.login-container p {
+    margin-top: 15px;
+    color: #555;
+}
 
-    .mobile-link {
-        color: #ffffff;
-        font-size: 24px;
-        font-weight: 600;
-        text-decoration: none;
-        text-transform: uppercase;
-        padding: 20px;
-        transition: background-color 0.3s; 
-    }
+.login-container a {
+    color: #0084a2;
+    text-decoration: none;
+}
 
-    .mobile-link:hover {
-        background-color: #0084a2; /* Kolor podświetlenia po najechaniu myszką */
-    }
+.login-container a:hover {
+    text-decoration: underline;
+}
+/* Styl popupu błędu */
+.error-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Tło z półprzeźroczystym czarnym kolorem */
+    z-index: 999; /* Upewnij się, że popup jest na wierzchu */
+}
 
-    .mobile-menu.active {
-        max-height: 500px; /* Rozwiń menu, ustalając maksymalną wysokość */
-        opacity: 1; /* Ustal przejrzystość */
-        margin: 0;
-    }
+.error-content {
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+}
+
+#error-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #5e0303; /* Kolor tekstu błędu */
+}
+
+#close-error-popup {
+    background-color: #3b0101; /* Kolor przycisku zamknięcia */
+    color: #fff; /* Kolor tekstu przycisku zamknięcia */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#close-error-popup:hover {
+    background-color: #000000; /* Kolor przycisku zamknięcia po najechaniu myszką */
 }
 
 
+/* 1251 nizej */
+@media (max-width: 1250px) {
+    .nav-link {
+        font-size: 20px; /* Zmniejsz rozmiar pozycji menu, ikon i logo */
+        margin: 0 5px;
+    }
+    .user-icon, .cart-icon, .logo {
+        height: 35px;
+        margin: 0 5px;
+    }
+    .user-menu {
+        top: 79px;
+    }
+}
 
-
-/* Dla szerokości ekranu większej lub równej 911px */
+/* 911 wyzej */
 @media (min-width: 911px) {
-    
+
     .mobile-menu {
         display: none;
     }
@@ -267,20 +324,95 @@ html, body, div, p, a, img {
         width: 48px;
         margin: 0 10px;
     }
+    .user-menu {
+        top: 82px;
+    }
 }
 
-/* Dla szerokości ekranu mniejszej lub równej 1200px */
-@media (max-width: 1250px) {
+
+/* 911 nizej */
+@media (max-width: 911px) {
     .nav-link {
-        font-size: 20px; /* Zmniejsz rozmiar pozycji menu, ikon i logo */
-        margin: 0 5px;
+        font-size: 20px; /* Zmniejsz rozmiar czcionki na smartfonach */
     }
-    .user-icon, .cart-icon, .logo {
-        height: 35px;
-        margin: 0 5px;
+    .menu-center, .nav-links {
+        width: 0; /* Ustaw szerokość na 0 */
+        display: none; /* Ukryj element */
+    }
+
+    .menu-bar {
+        justify-content: space-between;
+        padding: 20px 0;
+        overflow: hidden;
+    }
+
+    .menu-button, .menu-left, .menu-right {
+        width: 25%; /* Przydziel każdemu 25% szerokości */
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu-button {
+        font-size: 36px; /* Zwiększ rozmiar przycisku menu */
+        cursor: pointer; /* Dodaj wskaźnik myszki */
+    }
+
+    .menu-left img {
+        height: 50px; /* Powiększ rozmiar logo */
+        width: auto; /* Automatyczny rozmiar szerokości */
+    }
+
+    .user-cart-icons img {
+        height: 50px; /* Powiększ rozmiar ikon */
+        width: 50px;
+    }
+
+    .user-icon:last-child, .cart-icon:last-child {
+        margin-right: 0; /* Usuń margines od prawej strony ostatnich ikon */
+    }
+
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 94px; /* Wartość zależy od wysokości menu-bar */
+        background-color: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        text-align: center;
+        z-index: 2; /* Wysunięte na wierzch */
+        max-height: 0; /* Ukryj menu na początek */
+        overflow: hidden; /* Ukryj zawartość, która wykracza poza maksymalną wysokość */
+        transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out; /* Dodaj animację */
+    }
+
+    .mobile-link {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 600;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 20px;
+        transition: background-color 0.3s;
+    }
+
+    .mobile-link:hover {
+        background-color: #0084a2; /* Kolor podświetlenia po najechaniu myszką */
+    }
+
+    .mobile-menu.active {
+        max-height: 500px; /* Rozwiń menu, ustalając maksymalną wysokość */
+        opacity: 1; /* Ustal przejrzystość */
+        margin: 0;
+    }
+    .user-menu {
+        top: 94px;
+        padding: 20px 40px;
+        width: calc(100% - 80px);
     }
 }
-
+/* 1251 wzwyz */
 @media (min-width: 1251px) {
     .menu-left, .menu-right {
         width: 20%;
@@ -288,3 +420,7 @@ html, body, div, p, a, img {
         justify-content: center;
     }
 }
+
+
+
+

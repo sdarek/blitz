@@ -172,5 +172,6 @@
     </footer>
 
     <script src="public/javascript/home.js"></script>
+    <script src="public/javascript/user.js"></script>
 </body>
 </html>

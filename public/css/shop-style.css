@@ -4,8 +4,8 @@ html, body, div, p, a, img {
     padding: 0;
     border: 0;
     font: inherit;
-    font-family: "Lato-Bold", Helvetica;
     text-decoration: none;
+    font-family: "Lato-Bold", Helvetica;
     list-style: none;
 }
 
@@ -23,10 +23,11 @@ html, body, div, p, a, img {
 
 
 .category {
-    text-align: center;
+    text-align: left;
 }
 
 .category h2 {
+    text-align: center;
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #fff;
@@ -34,7 +35,7 @@ html, body, div, p, a, img {
 
 .category ul {
     list-style: none;
-    padding: 0;
+    padding-left: 10px;
 }
 
 .category li {
@@ -47,7 +48,7 @@ html, body, div, p, a, img {
     display: block;
     padding: 8px 0;
     font-size: 1.2em;
-    transition: color 0.2s, #222 0.3s; /* Dodaj efekty przejścia dla kategorii */
+    transition: color 0.2s, background-color 0.3s, transform 0.5s;
 }
 
 .category a:hover {
@@ -56,13 +57,11 @@ html, body, div, p, a, img {
 
 /* Styl podkategorii */
 .category ul ul {
-    margin-left: 20px;
     display: none;
-    background: #222; /* Zmiana koloru tła dla podkategorii */
-    border-left: 4px solid #0fa866; /* Oznaczenie aktywnych kategorii */
+    border-left: 4px solid #ff6600; /* Oznaczenie aktywnych kategorii */
     padding-left: 16px;
     opacity: 0; /* Ukryj początkowo podkategorie */
-    transition: opacity 0.5s; /* Dodaj efekt fade-in */
+    transition: opacity 1.5s; /* Dodaj efekt fade-in */
 }
 
 .category ul ul li {

@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="public/css/shop-style.css">
     <link rel="stylesheet" type="text/css" href="public/css/effects.css">
-    <script src="public/javascript/menu.js"></script> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
 <body>
@@ -37,8 +36,33 @@
                         <img class="cart-icon" src="public/img/cart.svg" alt="Cart Icon">
                     </div>
                 </div>
+        <!-- menu rozwijane uzytkownika -->
+                <div class="user-menu" id="user-menu">
+                    <!-- Dodaj to miejsce w kodzie HTML, gdzie chcesz wyświetlić formularz logowania -->
+                    <div class="login-container">
+                        <h1>Logowanie</h1>
+                        <div class="error-popup" id="error-popup">
+                            <div class="error-content">
+                                <span id="error-message"></span>
+                                <button id="close-error-popup">Zamknij</button>
+                            </div>
+                        </div>
+
+                        <form action="login" method="post" class="login-form">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" required>
+
+                            <label for="password">Hasło:</label>
+                            <input type="password" id="password" name="password" required>
+
+                            <button type="submit">Zaloguj</button>
+                        </form>
+
+                        <p>Nie masz jeszcze konta? <a href="register.php">Zarejestruj się</a></p>
+                    </div>
+
+                </div>
             </div>
-        </div>
     </section>
 
     <main>
@@ -48,31 +72,32 @@
                 <ul>
                     <li><a href="#">Środki czystości</a>
                         <ul>
-                            <li><a href="#">Detergenty</a></li>
-                            <li><a href="#">Środki do dezynfekcji</a></li>
-                            <li><a href="#">Płyny do mycia naczyń</a></li>
+                            <li><a href="#" data-category-id="detergents">Detergenty</a></li>
+                            <li><a href="#" data-category-id="disinfectants">Środki do dezynfekcji</a></li>
+                            <li><a href="#" data-category-id="dishwashing">Płyny do mycia naczyń</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Kosmetyki</a>
                         <ul>
-                            <li><a href="#">Kosmetyki do rąk</a></li>
-                            <li><a href="#">Kosmetyki do ciała</a></li>
-                            <li><a href="#">Perfumy</a></li>
+                            <li><a href="#" data-category-id="handcare">Kosmetyki do rąk</a></li>
+                            <li><a href="#" data-category-id="bodycare">Kosmetyki do ciała</a></li>
+                            <li><a href="#" data-category-id="perfumes">Perfumy</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Akcesoria</a>
                         <ul>
-                            <li><a href="#">Mopy i szczotki</a></li>
-                            <li><a href="#">Rękawiczki ochronne</a></li>
-                            <li><a href="#">Worki na śmieci</a></li>
+                            <li><a href="#" data-category-id="mops">Mopy i szczotki</a></li>
+                            <li><a href="#" data-category-id="gloves">Rękawiczki ochronne</a></li>
+                            <li><a href="#" data-category-id="trashbags">Worki na śmieci</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </section>
-        
-    
         <section id="product-sections">
+            <div id="product-list">
+                <!-- Tutaj będą wyświetlane produkty z wybranej kategorii -->
+            </div>
             <div class="product-section">
                 <h2>Promocje</h2>
                 <div class="product-carousel">
@@ -176,16 +201,8 @@
         <!-- Stopka strony sklepu -->
     </footer>
 
-    <script>
-        // Pobranie elementu i dodanie obsługi zdarzenia
-        const logoContainer = document.getElementById('shop-logo');
-
-        logoContainer.addEventListener('click', () => {
-            document.querySelector('#shop').classList.add('page-leave-active');
-            setTimeout(() => {
-                window.location.href = 'home';
-            }, 300);
-        });
-    </script>
+    <script src="public/javascript/shop.js"></script>
+    <script src="public/javascript/menu.js"></script>
+    <script src="public/javascript/user.js"></script>
 </body>
 </html>

@@ -244,7 +244,7 @@ html, body, div, p, a, img {
 }
 
 #close-error-popup {
-    background-color: #3b0101; /* Kolor przycisku zamknięcia */
+    background-color: #122741; /* Kolor przycisku zamknięcia */
     color: #fff; /* Kolor tekstu przycisku zamknięcia */
     border: none;
     padding: 10px 20px;

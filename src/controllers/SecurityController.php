@@ -2,33 +2,33 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
+require_once __DIR__.'/../repository/UserRepository.php';
 
 class SecurityController extends AppController
 {
     public function login(){
-        $user = new User('email@email.com', 'password', 'Jaja', 'surname');
 
-        $userRepository = new \repository\UserRepository();
-
+        $userRepository = new UserRepository();
         if (!$this->isPost()) {
-            return $this->render('login');
+            return $this->render('home');
         }
 
         $email = $_POST["email"];
         $password = $_POST["password"];
 
         $user = $userRepository->getUser($email);
-
         if(!$user){
-
-        }
-
-        if ($user->getEmail() == $email &&  $user->getPassword() == $password) {
-            $response = ['success' => true];
+            $response = ['success' => false, 'message' => 'Użytkownik nie istnieje'];
         }
         else {
-            $response = ['success' => false, 'message' => 'Błąd logowania. Sprawdź dane.'];
+            #if (password_verify($password, $user->getPassword())) {
+            if ($user->getPassword() === $password) {
+                $response = ['success' => true];
+            } else {
+                $response = ['success' => false, 'message' => 'Błąd logowania. Sprawdź dane.'];
+            }
         }
+
         header('Content-Type: application/json');
         echo json_encode($response);
 

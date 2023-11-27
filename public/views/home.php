@@ -37,7 +37,7 @@
                         <a class="nav-link" href="shop.php">SKLEP</a>
                         <a class="nav-link" href="#informacje">INFORMACJE</a>
                         <a class="nav-link" href="#kontakt">KONTAKT</a>
-                        <a class="nav-link" href="#wyszukiwanie">WYSZUKIWANIE</a>
+                        <a class="nav-link" href="#">WYSZUKIWANIE</a>
                     </div>
                 </div>
                 <div class="menu-right">
@@ -50,7 +50,6 @@
 
             <!-- menu rozwijane uzytkownika -->
             <div class="user-menu" id="user-menu">
-                <!-- Dodaj to miejsce w kodzie HTML, gdzie chcesz wyświetlić formularz logowania -->
                 <div class="login-container">
                     <h1>Logowanie</h1>
                     <div class="error-popup" id="error-popup">

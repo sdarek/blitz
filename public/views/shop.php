@@ -58,7 +58,7 @@
                             <button type="submit">Zaloguj</button>
                         </form>
 
-                        <p>Nie masz jeszcze konta? <a href="register.php">Zarejestruj się</a></p>
+                        <p>Nie masz jeszcze konta? <a href="#">Zarejestruj się</a></p>
                     </div>
 
                 </div>

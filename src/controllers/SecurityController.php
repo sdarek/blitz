@@ -8,8 +8,21 @@ class SecurityController extends AppController
     public function login(){
         $user = new User('email@email.com', 'password', 'Jaja', 'surname');
 
+        $userRepository = new \repository\UserRepository();
+
+        if (!$this->isPost()) {
+            return $this->render('login');
+        }
+
         $email = $_POST["email"];
         $password = $_POST["password"];
+
+        $user = $userRepository->getUser($email);
+
+        if(!$user){
+
+        }
+
         if ($user->getEmail() == $email &&  $user->getPassword() == $password) {
             $response = ['success' => true];
         }

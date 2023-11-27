@@ -149,7 +149,8 @@ html, body, div, p, a, img {
     opacity: 0; /* Rozpocznij z przeźroczystością 0 */
     transition: opacity 0.5s ease-in-out;
 }
-.login-container {
+.login-container,
+.register-container {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
@@ -157,23 +158,27 @@ html, body, div, p, a, img {
     padding: 20px;
 }
 
-.login-container h1 {
+.login-container h1,
+.register-container h1 {
     color: #333;
 }
 
-.login-container .login-form {
+.login-container .login-form,
+.register-container .register-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.login-container label {
+.login-container label,
+.register-container label {
     margin-top: 10px;
     font-weight: bold;
     color: #555;
 }
 
-.login-container input {
+.login-container input,
+.register-container input {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
@@ -181,7 +186,8 @@ html, body, div, p, a, img {
     border-radius: 3px;
 }
 
-.login-container button {
+.login-container button,
+.register-container button {
     background-color: #0084a2;
     color: #fff;
     border: none;
@@ -193,21 +199,25 @@ html, body, div, p, a, img {
     transition: background-color 0.3s;
 }
 
-.login-container button:hover {
+.login-container button:hover,
+.register-container button:hover {
     background-color: #00657d;
 }
 
-.login-container p {
+.login-container p,
+.register-container p {
     margin-top: 15px;
     color: #555;
 }
 
-.login-container a {
+.login-container a,
+.register-container a {
     color: #0084a2;
     text-decoration: none;
 }
 
-.login-container a:hover {
+.login-container a:hover,
+.register-container a:hover {
     text-decoration: underline;
 }
 /* Styl popupu błędu */
@@ -257,93 +267,119 @@ html, body, div, p, a, img {
     background-color: #000000; /* Kolor przycisku zamknięcia po najechaniu myszką */
 }
 
-/* Styl dla formularza rejestracji */
-.register-container {
-    background-color: rgba(255, 255, 255, 0.9); /* Przezroczyste tło */
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px;
-    margin: 0 auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Cień */
-}
+/* Dodaj zapytania media dla smartfonów */
+@media only screen and (max-width: 899px) {
 
-.register-container h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.register-form {
-    text-align: left;
-}
-
-.register-form label {
-    display: block;
-    font-size: 18px;
-    margin-top: 15px;
-    color: #333;
-}
-
-.register-form input[type="text"],
-.register-form input[type="email"],
-.register-form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.register-form button {
-    background-color: #0084a2;
-    color: #fff;
-    font-size: 18px;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.register-form button:hover {
-    background-color: #005366;
-}
-
-.register-container p {
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-.register-container p a {
-    color: #0084a2;
-    text-decoration: none;
-}
-
-.register-container p a:hover {
-    text-decoration: underline;
-}
-
-
-/* 1251 nizej */
-@media (max-width: 1250px) {
-    .nav-link {
-        font-size: 20px; /* Zmniejsz rozmiar pozycji menu, ikon i logo */
-        margin: 0 5px;
+    .menu-button {
+        display: flex;
+        width: 10%;
+        text-align: left;
+        justify-content: center;
+        align-items: center;
+        padding-left: 20px;
     }
-    .user-icon, .cart-icon, .logo {
-        height: 35px;
-        margin: 0 5px;
+    .menu-left {
+        display: flex;
+        width: 70%;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu-right {
+        display: flex;
+        width: 20%;
+        text-align: right;
+        justify-content: right;
+    }
+
+    .menu-center, .nav-links {
+        display: none;
+    }
+
+    .menu-bar {
+        justify-content: space-between;
+        padding: 20px 0;
+        overflow: hidden;
+    }
+
+    .menu-button {
+        font-size: 36px;
+        cursor: pointer;
+    }
+
+    .menu-left img {
+        height: 60px;
+        width: auto;
+    }
+
+    .user-cart-icons img {
+        height: 55px; /* Powiększ rozmiar ikon */
+        width: 55px;
+    }
+
+    .user-icon:last-child, .cart-icon:last-child {
+        margin-right: 0;
+    }
+
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 127px; /* Wartość zależy od wysokości menu-bar */
+        background-color: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        text-align: center;
+        z-index: 2; /* Wysunięte na wierzch */
+        max-height: 0; /* Ukryj menu na początek */
+        overflow: hidden; /* Ukryj zawartość, która wykracza poza maksymalną wysokość */
+        transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out; /* Dodaj animację */
+    }
+
+    .mobile-menu .mobile-link {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 600;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 40px 0;
+        transition: background-color 0.3s;
+    }
+
+    .mobile-menu .mobile-link:hover {
+        background-color: #0084a2; /* Kolor podświetlenia po najechaniu myszką */
+    }
+
+    .mobile-menu.active {
+        max-height: 100vh; /* Rozwiń menu, ustalając maksymalną wysokość */
+        opacity: 1; /* Ustal przejrzystość */
+        margin: 0;
     }
     .user-menu {
-        top: 79px;
+        top: 127px;
+        padding: 40px 40px;
+        width: calc(100% - 80px);
+    }
+    .login-container button,
+    .register-container button {
+        font-size: 30px;
+    }
+
+    .login-container p,
+    .register-container p {
+        font-size: 20px;
+    }
+    .login-container h1,
+    .register-container h1 {
+        font-size: 35px;
+    }
+    .login-container label,
+    .register-container label {
+        font-size: 20px;
     }
 }
 
-/* 911 wyzej */
-@media (min-width: 911px) {
+/* Dodaj zapytania media dla średnich ekranów */
+@media only screen and (min-width: 900px) and (max-width: 1100px) {
 
     .mobile-menu {
         display: none;
@@ -356,140 +392,99 @@ html, body, div, p, a, img {
         justify-content: space-between;
         padding: 15px 0;
     }
-
     .menu-left{
         width: 30%;
         display: flex;
         justify-content: center;
     }
-
-    .menu-right {
-        width: 10%
-    }
-
-    .logo {
-        height: 48px; /* Powiększ rozmiar logo */
-        width: auto;
-        filter: brightness(0) invert(1);
-    }
-
     .menu-center {
         width: 60%;
         display: flex;
         justify-content: center;
     }
+    .menu-right {
+        width: 10%
+    }
+    .menu-left .logo {
+        height: 52px; /* Powiększ rozmiar logo */
+        width: auto;
+        filter: brightness(0) invert(1);
+    }
 
-    .nav-links {
+    .menu-center .nav-links {
         display: flex;
     }
 
-    .nav-link {
+    .menu-center .nav-links .nav-link {
         font-size: 24px;
         margin: 0 15px;
     }
 
     .user-icon, .cart-icon {
-        height: 48px; /* Powiększ rozmiar ikon */
-        width: 48px;
-        margin: 0 10px;
-    }
-    .user-menu {
-        top: 82px;
+        height: 44px; /* Powiększ rozmiar ikon */
+        width: 44px;
+        margin: 0;
     }
 }
 
-
-/* 911 nizej */
-@media (max-width: 911px) {
-    .nav-link {
-        font-size: 20px; /* Zmniejsz rozmiar czcionki na smartfonach */
+/* Dodaj zapytania media dla dużych ekranów */
+@media only screen and (min-width: 1101px) {
+    .mobile-menu {
+        display: none;
+        top: 94px;
     }
-    .menu-center, .nav-links {
-        width: 0; /* Ustaw szerokość na 0 */
-        display: none; /* Ukryj element */
+    .user-menu {
+        top: 94px;
+    }
+    .menu-button {
+        display: none; /* Ukryj przycisk rozwijania menu */
     }
 
     .menu-bar {
         justify-content: space-between;
-        padding: 20px 0;
-        overflow: hidden;
+        padding: 15px 0;
     }
-
-    .menu-button, .menu-left, .menu-right {
-        width: 25%; /* Przydziel każdemu 25% szerokości */
-        text-align: center;
+    .menu-left{
+        width: 30%;
         display: flex;
         justify-content: center;
-        align-items: center;
     }
-
-    .menu-button {
-        font-size: 36px; /* Zwiększ rozmiar przycisku menu */
-        cursor: pointer; /* Dodaj wskaźnik myszki */
-    }
-
-    .menu-left img {
-        height: 50px; /* Powiększ rozmiar logo */
-        width: auto; /* Automatyczny rozmiar szerokości */
-    }
-
-    .user-cart-icons img {
-        height: 50px; /* Powiększ rozmiar ikon */
-        width: 50px;
-    }
-
-    .user-icon:last-child, .cart-icon:last-child {
-        margin-right: 0; /* Usuń margines od prawej strony ostatnich ikon */
-    }
-
-    .mobile-menu {
+    .menu-center {
+        width: 55%;
         display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 94px; /* Wartość zależy od wysokości menu-bar */
-        background-color: rgba(0, 0, 0, 0.7);
-        width: 100%;
-        text-align: center;
-        z-index: 2; /* Wysunięte na wierzch */
-        max-height: 0; /* Ukryj menu na początek */
-        overflow: hidden; /* Ukryj zawartość, która wykracza poza maksymalną wysokość */
-        transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out; /* Dodaj animację */
+        justify-content: center;
+    }
+    .menu-right {
+        width: 25%;
+    }
+    .menu-right .user-cart-icons {
+        justify-content: center;
+    }
+    .menu-left .logo {
+        height: 60px; /* Powiększ rozmiar logo */
+        width: auto;
+        filter: brightness(0) invert(1);
+    }
+    .menu-left .logo-text h1 {
+        font-size: 35px;
+    }
+    .menu-left .logo-text p {
+        font-size: 18px;
     }
 
-    .mobile-link {
-        color: #ffffff;
+    .menu-center .nav-links {
+        display: flex;
+    }
+
+    .menu-center .nav-links .nav-link {
         font-size: 24px;
-        font-weight: 600;
-        text-decoration: none;
-        text-transform: uppercase;
-        padding: 20px;
-        transition: background-color 0.3s;
+        margin: 0 25px;
     }
 
-    .mobile-link:hover {
-        background-color: #0084a2; /* Kolor podświetlenia po najechaniu myszką */
-    }
-
-    .mobile-menu.active {
-        max-height: 500px; /* Rozwiń menu, ustalając maksymalną wysokość */
-        opacity: 1; /* Ustal przejrzystość */
-        margin: 0;
-    }
-    .user-menu {
-        top: 94px;
-        padding: 20px 40px;
-        width: calc(100% - 80px);
+    .user-icon, .cart-icon {
+        height: 54px; /* Powiększ rozmiar ikon */
+        width: 54px;
+        margin: 0 5px;
     }
 }
-/* 1251 wzwyz */
-@media (min-width: 1251px) {
-    .menu-left, .menu-right {
-        width: 20%;
-        display: flex;
-        justify-content: center;
-    }
-}
-
-
-
 

@@ -37,7 +37,6 @@
                         <a class="nav-link" href="shop.php">SKLEP</a>
                         <a class="nav-link" href="#informacje">INFORMACJE</a>
                         <a class="nav-link" href="#kontakt">KONTAKT</a>
-                        <a class="nav-link" href="#">WYSZUKIWANIE</a>
                     </div>
                 </div>
                 <div class="menu-right">
@@ -132,7 +131,7 @@
             <h2>POZNAJ WYŻSZĄ JAKOŚĆ CZYSTOŚCI</h2>
             <p>Witaj na naszej stronie, gdzie znajdziesz najlepsze produkty do utrzymania czystości w swoim domu i nie tylko. Nasze produkty gwarantują świeżość w jednym kliknięciu.</p>
             <a href="shop" class="shop-button">Przejdź do witryny sklepowej</a>
-    
+
             <div class="product-carousel">
                 <div class="product-container">
                     <div class="left-arrow arrow" onclick="showPrevProduct()">&#9665;</div>
@@ -153,7 +152,7 @@
                 </div>
             </div>
             <p>Nunc sed convallis nulla, eget viverra sapien. Pellentesque cursus aliquam odio vitae accumsan. Nunc nec molestie nisi. Mauris commodo felis et ante volutpat mattis. Pellentesque nisi arcu, scelerisque ut enim eu, scelerisque faucibus libero. Vestibulum malesuada neque vehicula enim pellentesque, cursus ultrices massa lobortis. Vivamus venenatis eros ut diam sagittis ultrices. Nullam non purus id nulla sodales eleifend eu non mauris.</p>
-            
+
         </div>
     </section>
     <section id="kontakt">
@@ -170,8 +169,8 @@
             <form>
                 <label for="name">Imię i nazwisko:</label>
                 <input type="text" id="name" name="name" required>
-                <label for="email">Adres email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="emailContact">Adres email:</label>
+                <input type="email" id="emailContact" name="email" required>
                 <label for="message">Wiadomość:</label>
                 <textarea id="message" name="message" required></textarea>
                 <button type="submit">Wyślij</button>
@@ -189,7 +188,6 @@
                 <li><a href="shop">Sklep</a></li>
                 <li><a href="#informacje">Informacje</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
-                <li><a href="#wyszukiwanie">Wyszukiwanie</a></li>
             </ul>
             <div class="footer-social">
                 <a href="#"><i class="fab fa-facebook"></i></a>

@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sklep - Blitz</title>
     <meta name="description" content="Sklep z produktami Blitz - Chemia Profesjonalna"/>
-    <link rel="stylesheet" type="text/css" href="public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="public/css/shop-style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="public/css/effects.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
@@ -36,9 +36,8 @@
                         <img class="cart-icon" src="public/img/cart.svg" alt="Cart Icon">
                     </div>
                 </div>
-        <!-- menu rozwijane uzytkownika -->
+                <!-- menu rozwijane uzytkownika -->
                 <div class="user-menu" id="user-menu">
-                    <!-- Dodaj to miejsce w kodzie HTML, gdzie chcesz wyświetlić formularz logowania -->
                     <div class="login-container">
                         <h1>Logowanie</h1>
                         <div class="error-popup" id="error-popup">
@@ -58,11 +57,39 @@
                             <button type="submit">Zaloguj</button>
                         </form>
 
-                        <p>Nie masz jeszcze konta? <a href="#">Zarejestruj się</a></p>
+                        <p>Nie masz jeszcze konta? <a href="#" id="showRegister">Zarejestruj się</a></p>
                     </div>
 
+                    <div class="register-container" style="display: none;">
+                        <h1>Rejestracja</h1>
+                        <div class="error-popup" id="register-error-popup">
+                            <div class="error-content">
+                                <span id="register-error-message"></span>
+                                <button id="close-register-error-popup">Zamknij</button>
+                            </div>
+                        </div>
+
+                        <form action="register" method="post" class="register-form">
+                            <label for="register-name">Imię i nazwisko:</label>
+                            <input type="text" id="register-name" name="register-name" required>
+
+                            <label for="register-email">E-mail:</label>
+                            <input type="email" id="register-email" name="register-email" required>
+
+                            <label for="register-password">Hasło:</label>
+                            <input type="password" id="register-password" name="register-password" required>
+
+                            <label for="confirm-password">Potwierdź hasło:</label>
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+
+                            <button type="submit">Zarejestruj</button>
+                        </form>
+
+                        <p>Masz już konto? <a href="#" id="showLogin">Zaloguj się</a></p>
+                    </div>
+
+
                 </div>
-            </div>
     </section>
 
     <main>

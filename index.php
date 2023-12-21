@@ -9,4 +9,5 @@ Routing::get('home', 'DefaultController');
 Routing::get('shop', 'DefaultController');
 Routing::post('login', 'SecurityController');
 Routing::post('register', 'SecurityController');
+Routing::post('addProduct', 'ProductController');
 Routing::run($path);

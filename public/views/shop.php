@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="public/css/effects.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
 </head>
 <body>
     <section id="shop">
@@ -87,9 +88,9 @@
 
                         <p>Masz już konto? <a href="#" id="showLogin">Zaloguj się</a></p>
                     </div>
-
-
                 </div>
+            </div>
+        </div>
     </section>
 
     <main>
@@ -119,20 +120,71 @@
                         </ul>
                     </li>
                 </ul>
+                <button id="addProductButton">Dodaj Produkt</button>
             </div>
         </section>
         <section id="product-sections">
             <div id="product-list">
                 <!-- Tutaj będą wyświetlane produkty z wybranej kategorii -->
             </div>
+
+            <!-- dodawanie produktu dla admina -->
+            <div id="addProductForm" style="display: none;">
+                <h2>Dodaj Produkt</h2>
+                <form id="productForm" action="addProduct" method="POST" enctype="multipart/form-data">
+                    <?php
+                        if(isset($messages)){
+                            foreach($messages as $message) {
+                                echo $message;
+                            }
+                        }
+                    ?>
+                    <label for="productName">Nazwa:</label>
+                    <input type="text" id="productName" name="productName" required>
+
+                    <label for="productPrice">Cena:</label>
+                    <input type="number" id="productPrice" name="productPrice" required>
+
+                    <label for="productDescription">Opis:</label>
+                    <textarea id="productDescription" name="productDescription"></textarea>
+
+                    <label for="productCategory">Kategoria:</label>
+                    <select id="productCategory" name="productCategory">
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= $category['categoryid'] ?>"><?= $category['categoryname'] ?></option>
+                        <?php endforeach; ?>
+                        <option value="existingCategory">Twoja stara</option>
+                        <option value="newCategory">Dodaj nową kategorię</option>
+                    </select>
+
+                    <div id="newCategory" style="display: none;">
+                        <label for="newCategoryName">Nowa Kategoria:</label>
+                        <input type="text" id="newCategoryName" name="newCategoryName">
+                    </div>
+
+                    <label for="newImage">Dodaj zdjęcie:</label>
+                    <input type="file" id="newImage" name="newImage">
+
+                    <button type="submit">Dodaj Produkt</button>
+                </form>
+            </div>
+
             <div class="product-section">
                 <h2>Promocje</h2>
                 <div class="product-carousel">
                     <!-- Przykładowe produkty -->
                     <div class="product">
-                        <h3>Nazwa Produktu 1</h3>
-                        <p>Opis produktu 1.</p>
-                        <img src="public/img/placeholder-image1.jpg" alt="Produkt 1">
+                        <?php
+                        if ($product !== null) {
+                            // Kod do wykonania, gdy $product nie jest null
+                            echo "<h3>{$product->getName()}</h3>";
+                            echo "<p>{$product->getDescription()}</p>";
+                            echo "<img src='public/uploads/{$product->getImage()}' alt='Produkt 1'>";
+                        } else {
+                            // Kod do wykonania, gdy $product jest null
+                            echo "<p>Brak produktu.</p>";
+                        }
+                        ?>
                     </div>
                     <div class="product">
                         <h3>Nazwa Produktu 1</h3>

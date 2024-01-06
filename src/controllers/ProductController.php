@@ -18,6 +18,15 @@ class ProductController extends AppController
         $this->productRepository = new ProductRepository();
     }
 
+    public function shop() {
+        $products = $this->productRepository->getProducts();
+        $categories = $this->productRepository->getCategories();
+        $this->render('shop', [
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
+
     public function addProduct(){
         if($this->isPost() && is_uploaded_file($_FILES['newImage']['tmp_name']) && $this->validate($_FILES['newImage'])) {
             move_uploaded_file(
@@ -30,31 +39,37 @@ class ProductController extends AppController
             $productDescription = $_POST['productDescription'];
             $imageFileName = $_FILES['newImage']['name'];
             $categoryName = $_POST['productCategory'];
-            $newCategoryName = $_POST['newCategoryName'];
+            $newCategoryName = $_POST['newCategoryName'] ?? '';
+            $productPrice = $_POST['productPrice'];
 
-            $categoryId = $this->productRepository->getCategoryIdByName($categoryName);
-
-            if (!$categoryId) {
-                // Kategoria nie istnieje, więc dodaj ją do bazy danych
+            if ($categoryName == 'newCategory' && !empty($newCategoryName)) {
                 $categoryId = $this->productRepository->addCategory($newCategoryName);
+            } else {
+                $categoryId = $this->productRepository->getCategoryIdByName($categoryName);
+                if (!$categoryId) {
+                    $categoryId = $this->productRepository->addCategory($categoryName);
+                }
             }
-
 
             $product = new Product(
                 $productName,
-                #$_POST['productPrice'],
-                22.3,
+                $productPrice,
                 $productDescription,
-                #$_POST['productCategory'],
                 $categoryId,
                 1,
                 $imageFileName
             );
 
+
+
             $this->productRepository->addProduct($product);
 
 
-            return $this->render('shop', ['messages' => $this->messages, 'product' => $product]);
+            return $this->render('shop', [
+                'messages' => $this->messages,
+                'products' => $this->productRepository->getProducts(),
+                'categories' => $this->productRepository->getCategories()
+                ]);
         }
         // Jeśli nie udało się dodać produktu, wyświetl widok dodawania produktu z ewentualnymi komunikatami
         return $this->render('addproduct', ['messages' => $this->messages]);

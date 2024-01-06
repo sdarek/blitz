@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="public/css/effects.css">
     <script src="public/javascript/menu.js"></script>
+    <script type="text/javascript" src="./public/javascript/script.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 
     </head>

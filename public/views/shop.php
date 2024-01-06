@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="public/css/shop-style.css">
     <link rel="stylesheet" type="text/css" href="public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="public/css/effects.css">
+    <script src="public/javascript/shop.js" defer></script>
+    <script src="public/javascript/menu.js" defer></script>
+    <script src="public/javascript/user.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 
 </head>
@@ -97,29 +100,11 @@
         <section id="product-categories">
             <div class="category">
                 <h2>Kategorie</h2>
-                <ul>
-                    <li><a href="#">Środki czystości</a>
-                        <ul>
-                            <li><a href="#" data-category-id="detergents">Detergenty</a></li>
-                            <li><a href="#" data-category-id="disinfectants">Środki do dezynfekcji</a></li>
-                            <li><a href="#" data-category-id="dishwashing">Płyny do mycia naczyń</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Kosmetyki</a>
-                        <ul>
-                            <li><a href="#" data-category-id="handcare">Kosmetyki do rąk</a></li>
-                            <li><a href="#" data-category-id="bodycare">Kosmetyki do ciała</a></li>
-                            <li><a href="#" data-category-id="perfumes">Perfumy</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Akcesoria</a>
-                        <ul>
-                            <li><a href="#" data-category-id="mops">Mopy i szczotki</a></li>
-                            <li><a href="#" data-category-id="gloves">Rękawiczki ochronne</a></li>
-                            <li><a href="#" data-category-id="trashbags">Worki na śmieci</a></li>
-                        </ul>
-                    </li>
-                </ul>
+
+                <?php foreach ($categories as $category): ?>
+                    <li><a href="#" data-category-id="<?= $category->getId(); ?>"><?= $category->getName(); ?></a></li>
+                <?php endforeach; ?>
+
                 <button id="addProductButton">Dodaj Produkt</button>
             </div>
         </section>
@@ -151,9 +136,8 @@
                     <label for="productCategory">Kategoria:</label>
                     <select id="productCategory" name="productCategory">
                         <?php foreach ($categories as $category): ?>
-                            <option value="<?= $category['categoryid'] ?>"><?= $category['categoryname'] ?></option>
+                            <option value="<?= $category->getName(); ?>"><?= $category->getName(); ?></option>
                         <?php endforeach; ?>
-                        <option value="existingCategory">Twoja stara</option>
                         <option value="newCategory">Dodaj nową kategorię</option>
                     </select>
 
@@ -170,6 +154,17 @@
             </div>
 
             <div class="product-section">
+                <?php foreach ($products as $product): ?>
+                    <div class="product">
+                        <h3><?= $product->getName(); ?></h3>
+                        <p><?= $product->getDescription(); ?></p>
+                        <img src="public/uploads/<?= $product->getImage(); ?>" alt="Produkt 1">
+                    </div>
+                <?php endforeach; ?>
+
+
+
+
                 <h2>Promocje</h2>
                 <div class="product-carousel">
                     <!-- Przykładowe produkty -->
@@ -208,7 +203,7 @@
                     <button class="next"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
-    
+
             <div class="product-section">
                 <h2>Bestsellery</h2>
                 <div class="product-carousel">
@@ -240,7 +235,7 @@
                     <button class="next"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
-    
+
             <div class="product-section">
                 <h2>Nowości</h2>
                 <div class="product-carousel">
@@ -274,14 +269,11 @@
             </div>
         </section>
     </main>
-    
+
 
     <footer>
         <!-- Stopka strony sklepu -->
     </footer>
 
-    <script src="public/javascript/shop.js"></script>
-    <script src="public/javascript/menu.js"></script>
-    <script src="public/javascript/user.js"></script>
 </body>
 </html>

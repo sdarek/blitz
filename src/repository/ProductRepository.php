@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../models/Product.php';
+require_once __DIR__.'/../models/Category.php';
 require_once __DIR__.'/Repository.php';
 
 
@@ -30,6 +31,29 @@ class ProductRepository extends Repository
 
         );
     }
+    public function getProducts(): array
+    {
+        $result = [];
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM products
+        ');
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($products as $product) {
+            $result[] = new Product(
+                $product['productname'],
+                $product['price'],
+                $product['description'],
+                $product['categoryid'],
+                $product['supplierid'],
+                $product['image']
+            );
+        }
+
+        return $result;
+    }
+
 
     public function addProduct(Product $product) {
         $date = new DateTime();
@@ -70,13 +94,23 @@ class ProductRepository extends Repository
         return $result ? $result['categoryid'] : null;
     }
 
-    public function getCategories()
+    public function getCategories(): array
     {
-        $stmt = $this->database->connect()->prepare('SELECT * FROM productcategories');
+        $result = [];
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM productcategories
+        ');
         $stmt->execute();
-
         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $categories;
+        foreach ($categories as $category) {
+            $result[] = new Category(
+                $category['categoryid'],
+                $category['categoryname'],
+                $category['categorydescription']
+            );
+        }
+
+        return $result;
     }
 }

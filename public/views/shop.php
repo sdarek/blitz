@@ -277,3 +277,11 @@
 
 </body>
 </html>
+
+<template id="product-template">
+    <div class="product">
+        <h3>nazwa</h3>
+        <p>opis</p>
+        <img src="" alt="Produkt">
+    </div>
+</template>

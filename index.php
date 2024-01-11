@@ -10,4 +10,5 @@ Routing::get('shop', 'ProductController');
 Routing::post('login', 'SecurityController');
 Routing::post('register', 'SecurityController');
 Routing::post('addProduct', 'ProductController');
+Routing::post('search', 'ProductController');
 Routing::run($path);

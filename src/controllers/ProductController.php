@@ -74,6 +74,18 @@ class ProductController extends AppController
         // Jeśli nie udało się dodać produktu, wyświetl widok dodawania produktu z ewentualnymi komunikatami
         return $this->render('addproduct', ['messages' => $this->messages]);
     }
+    public function search()
+    {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if($contentType === "application/json")
+        {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+            header('Content-type: application/json');
+            http_response_code(200);
+            echo json_encode($this->productRepository->getProductByTitle($decoded['search']));
+        }
+    }
     private function validate(array $newImage): bool
     {
         if($newImage['SIZE'] > self::MAX_FILE_SIZE) {
@@ -86,5 +98,7 @@ class ProductController extends AppController
         }
         return true;
     }
+
+
 
 }

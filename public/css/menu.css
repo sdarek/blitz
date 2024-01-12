@@ -23,6 +23,7 @@ html, body, div, p, a, img {
     padding: 15px 0;
     z-index: 1;
     color: #ffffff;
+    min-height: 64px;
 }
 
 .menu-left{
@@ -106,6 +107,7 @@ html, body, div, p, a, img {
 }
 
 .search-bar {
+    width: 80%;
     display: flex;
     align-items: center;
 }
@@ -121,16 +123,8 @@ html, body, div, p, a, img {
     background-color: transparent;
 }
 
-.search-bar i {
-    padding: 10px;
-    cursor: pointer;
-    font-size: 30px; /* Zwiększ rozmiar ikony lupy */
-    color: #fff;
-    margin-left: 5px;
-}
-
 .search-bar.active input {
-    width: 150px; /* Rozwiń pole do wyszukiwania */
+    width: 100%; /* Rozwiń pole do wyszukiwania */
     padding: 10px;
     border: 1px solid #fff; /* Dodaj obramowanie */
     height: auto;
@@ -149,6 +143,8 @@ html, body, div, p, a, img {
     opacity: 0; /* Rozpocznij z przeźroczystością 0 */
     transition: opacity 0.5s ease-in-out;
 }
+
+.user-container,
 .login-container,
 .register-container {
     background-color: #fff;
@@ -158,9 +154,12 @@ html, body, div, p, a, img {
     padding: 20px;
 }
 
+.user-container h1,
 .login-container h1,
 .register-container h1 {
+    font-size: 28px;
     color: #333;
+    margin-bottom: 15px;
 }
 
 .login-container .login-form,
@@ -186,6 +185,18 @@ html, body, div, p, a, img {
     border-radius: 3px;
 }
 
+.user-container .logout-btn {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.user-container .logout-btn,
 .login-container button,
 .register-container button {
     background-color: #0084a2;
@@ -198,14 +209,23 @@ html, body, div, p, a, img {
     font-weight: bold;
     transition: background-color 0.3s;
 }
+.user-container .logout-btn:hover {
+    background-color: #cc0000;
+}
+
+.user-container .logout-btn {
+    background-color: #ff0000;
+}
 
 .login-container button:hover,
 .register-container button:hover {
     background-color: #00657d;
 }
 
+.user-container .user-info p,
 .login-container p,
 .register-container p {
+    font-size: 18px;
     margin-top: 15px;
     color: #555;
 }
@@ -220,6 +240,14 @@ html, body, div, p, a, img {
 .register-container a:hover {
     text-decoration: underline;
 }
+
+
+.user-container .user-info {
+    margin-bottom: 20px;
+}
+
+
+
 /* Styl popupu błędu */
 .error-popup {
     display: none;

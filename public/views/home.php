@@ -50,6 +50,17 @@
 
             <!-- menu rozwijane uzytkownika -->
             <div class="user-menu" id="user-menu">
+
+                <?php session_start(); ?>
+                <div class="user-container" style="display: none;">
+                    <h1>Witaj, <?php echo $_SESSION['name']; ?>!</h1>
+                    <div class="user-info">
+                        <p>Email:  <?php echo $_SESSION['email']; ?></p>
+                        <p>Rola: <?php echo $_SESSION['role']; ?></p>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">Wyloguj</button>
+                </div>
+
                 <div class="login-container">
                     <h1>Logowanie</h1>
                     <div class="error-popup" id="error-popup">
@@ -82,8 +93,11 @@
                     </div>
 
                     <form action="register" method="post" class="register-form">
-                        <label for="register-name">Imię i nazwisko:</label>
+                        <label for="register-name">Imię</label>
                         <input type="text" id="register-name" name="register-name" required>
+
+                        <label for="register-surname">Nazwisko:</label>
+                        <input type="text" id="register-surname" name="register-surname" required>
 
                         <label for="register-email">E-mail:</label>
                         <input type="email" id="register-email" name="register-email" required>

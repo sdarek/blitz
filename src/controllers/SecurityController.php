@@ -23,7 +23,21 @@ class SecurityController extends AppController
         else {
             #if (password_verify($password, $user->getPassword())) {
             if ($user->getPassword() === $password) {
-                $response = ['success' => true];
+                session_start();
+                $_SESSION['user_id'] = $user->getId();
+                $_SESSION['email'] = $user->getEmail();
+                $_SESSION['role'] = $user->getRole();
+                $_SESSION['name'] = $user->getName();
+                $userData = ['id' => $user->getId(),
+                            'email' => $user->getEmail(),
+                            'name' => $user->getName(),
+                            'surname' => $user->getSurname(),
+                            'role' => $user->getRole()
+                ];
+                $response = [
+                    'success' => true,
+                    'user_data' => $userData
+                    ];
             } else {
                 $response = ['success' => false, 'message' => 'Błąd logowania. Sprawdź dane.'];
             }
@@ -31,30 +45,32 @@ class SecurityController extends AppController
 
         header('Content-Type: application/json');
         echo json_encode($response);
-
-
-        #$url = "http://$_SERVER[HTTP_HOST]";
-        #header("Location: {$url}/shop");
     }
 
     public function register(){
-        // Pobranie danych z formularza rejestracji
+        $userRepository = new UserRepository();
+
         $email = $_POST["register-email"];
         $password = $_POST["register-password"];
         $name = $_POST["register-name"];
         $surname = $_POST["register-surname"];
 
-        // Tutaj można dodać logikę sprawdzającą poprawność danych, walidację, itp.
-        // Na potrzeby tego przykładu zakładamy prostą logikę - rejestracja zawsze powiedzie się
+        $user = $userRepository->registerUser($email, $password, $name, $surname);
 
-        // Przykładowa logika: Utworzenie obiektu User na podstawie przekazanych danych
-        //$user = new User($email, $password, $name, $surname);
-
-        // Tutaj można dodać logikę zapisu nowego użytkownika do bazy danych, itp.
-
-        // Przykładowa odpowiedź - zakładamy, że rejestracja zawsze się udaje
-        $response = ['success' => true];
-
+        session_start();
+        $_SESSION['user_id'] = $user->getId();
+        $_SESSION['email'] = $user->getEmail();
+        $_SESSION['role'] = $user->getRole();
+        $_SESSION['name'] = $user->getName();
+        $userData = ['id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'name' => $user->getName(),
+            'surname' => $user->getSurname(),
+            'role' => $user->getRole()
+        ];
+        $response = ['success' => true,
+            'user_data' => $userData
+        ];
         header('Content-Type: application/json');
         echo json_encode($response);
     }

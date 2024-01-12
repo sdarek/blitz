@@ -19,9 +19,33 @@ class ProductController extends AppController
     }
 
     public function shop() {
+        $href = 'shop';
+        session_start();
+        if(isset($_SESSION['user_id']))
+        {
+            if($_SESSION['role'] === 'admin') {
+                $href = 'shop_admin';
+            }
+        }
         $products = $this->productRepository->getProducts();
         $categories = $this->productRepository->getCategories();
-        $this->render('shop', [
+        $this->render($href, [
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
+    public function shop_admin() {
+        $href = 'shop_admin';
+        session_start();
+        if(isset($_SESSION['user_id']))
+        {
+            if($_SESSION['role'] !== 'admin') {
+                $href = 'shop';
+            }
+        }
+        $products = $this->productRepository->getProducts();
+        $categories = $this->productRepository->getCategories();
+        $this->render($href, [
             'products' => $products,
             'categories' => $categories
         ]);
@@ -83,9 +107,70 @@ class ProductController extends AppController
             $decoded = json_decode($content, true);
             header('Content-type: application/json');
             http_response_code(200);
-            echo json_encode($this->productRepository->getProductByTitle($decoded['search']));
+            $result = json_encode($this->productRepository->getProductByTitle($decoded['search']));
+            echo $result;
         }
     }
+    public function searchByCategory($id)
+    {
+        $result = $this->productRepository->getProductsByCategory($id);
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo json_encode($result);
+    }
+
+    public function addToCart()
+    {
+        // Pobranie danych z formularza
+        $productId = $_POST['productId'];
+        $quantity = $_POST['quantity'];
+        $customerId = 1; // Zakładamy, że użytkownik o id 1 jest aktualnie zalogowany. Tutaj dostosuj do własnej autentykacji.
+
+        // Dodanie produktu do koszyka
+        $this->productRepository->addToShoppingCart($customerId, $productId, $quantity);
+
+        // Przekierowanie z powrotem do sklepu
+        header('Location: /shop');
+    }
+
+    public function viewCart()
+    {
+        $customerId = 1; // Zakładamy, że użytkownik o id 1 jest aktualnie zalogowany. Tutaj dostosuj do własnej autentykacji.
+
+        // Pobranie zawartości koszyka
+        $cartItems = $this->productRepository->getShoppingCart($customerId);
+
+        $this->render('cart', [
+            'cartItems' => $cartItems
+        ]);
+    }
+
+    public function updateCartItem()
+    {
+        // Pobranie danych z formularza
+        $cartId = $_POST['cartId'];
+        $quantity = $_POST['quantity'];
+
+        // Aktualizacja ilości w koszyku
+        $this->productRepository->updateShoppingCartItem($cartId, $quantity);
+
+        // Przekierowanie z powrotem do widoku koszyka
+        header('Location: /cart');
+    }
+
+    public function removeCartItem()
+    {
+        // Pobranie danych z formularza
+        $cartId = $_POST['cartId'];
+
+        // Usunięcie pozycji z koszyka
+        $this->productRepository->removeShoppingCartItem($cartId);
+
+        // Przekierowanie z powrotem do widoku koszyka
+        header('Location: /cart');
+    }
+
+
     private function validate(array $newImage): bool
     {
         if($newImage['SIZE'] > self::MAX_FILE_SIZE) {
@@ -98,7 +183,5 @@ class ProductController extends AppController
         }
         return true;
     }
-
-
 
 }

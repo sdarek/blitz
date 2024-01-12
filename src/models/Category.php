@@ -1,6 +1,7 @@
 <?php
 class Category
 {
+    private $id;
     private $name;
     private $description;
 
@@ -33,11 +34,6 @@ class Category
     public function getId(): int
     {
         return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
 

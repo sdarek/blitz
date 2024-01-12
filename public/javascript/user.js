@@ -8,9 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const registerForm = document.querySelector('.register-form');
     const showRegisterLink = document.getElementById('showRegister');
+
     const loginContainer = document.querySelector('.login-container');
     const registerContainer = document.querySelector('.register-container');
-    
+    const userContainer = document.querySelector('.user-container');
+
     const userMenu = document.getElementById('user-menu');
     const showLogin = document.querySelector("#showLogin");
     const userIcon = document.querySelector(".user-icon");
@@ -24,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     userMenu.style.display = 'none'; // Ukryj menu
                 }, 300); // Czas animacji (0.3s)
             } else {
+                if(localStorage.getItem('user_id')) {
+                    registerContainer.style.display = "none";
+                    loginContainer.style.display = "none";
+                    userContainer.style.display = "block";
+                }
                 userMenu.style.display = 'block'; // Pokaż menu
                 setTimeout(() => {
                     userMenu.style.opacity = 1; // Ustal przeźroczystość na 1
@@ -59,9 +66,16 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Jeśli logowanie powiodło się, możesz przekierować użytkownika na inną stronę lub wykonać inne operacje
+                    if(data.user_data) {
+                        localStorage.setItem("user_id", data.user_data.id);
+                        localStorage.setItem("user_email", data.user_data.email);
+                        localStorage.setItem("user_name", data.user_data.name);
+                        localStorage.setItem("user_surname", data.user_data.surname);
+                        localStorage.setItem("user_role", data.user_data.role);
+                    }
                     window.location.href = 'shop';
-                } else {
+                }
+                else {
                     // Jeśli logowanie nie powiodło się, wyświetl odpowiedni komunikat
                     errorMessage.textContent = data.message;
                     errorPopup.style.display = 'block';
@@ -80,8 +94,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Tutaj możesz wykonać operacje po udanej rejestracji
-                    window.location.href = 'shop'; // Przekierowanie na stronę logowania po rejestracji
+                    if(data.user_data) {
+                        localStorage.setItem("user_id", data.user_data.id);
+                        localStorage.setItem("user_email", data.user_data.email);
+                        localStorage.setItem("user_name", data.user_data.name);
+                        localStorage.setItem("user_surname", data.user_data.surname);
+                        localStorage.setItem("user_role", data.user_data.role);
+                    }
+                    window.location.href = 'shop';
                 } else {
                     registerErrorMessage.textContent = data.message;
                     registerErrorPopup.style.display = 'block'; // Wyświetlenie komunikatu o błędzie rejestracji

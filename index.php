@@ -9,6 +9,7 @@ Routing::get('home', 'DefaultController');
 Routing::get('shop', 'ProductController');
 Routing::get('shop_admin', 'ProductController');
 Routing::post('login', 'SecurityController');
+Routing::post('logout', 'SecurityController');
 Routing::post('register', 'SecurityController');
 Routing::post('addProduct', 'ProductController');
 Routing::post('search', 'ProductController');

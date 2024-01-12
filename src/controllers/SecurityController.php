@@ -21,8 +21,7 @@ class SecurityController extends AppController
             $response = ['success' => false, 'message' => 'Użytkownik nie istnieje'];
         }
         else {
-            #if (password_verify($password, $user->getPassword())) {
-            if ($user->getPassword() === $password) {
+            if (password_verify($password, $user->getPassword())) {
                 session_start();
                 $_SESSION['user_id'] = $user->getId();
                 $_SESSION['email'] = $user->getEmail();
@@ -42,6 +41,16 @@ class SecurityController extends AppController
                 $response = ['success' => false, 'message' => 'Błąd logowania. Sprawdź dane.'];
             }
         }
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+    public function logout(){
+
+        session_start();
+        session_destroy();
+
+        $response = ['success' => true, 'message' => 'Wylogowano pomyślnie'];
 
         header('Content-Type: application/json');
         echo json_encode($response);

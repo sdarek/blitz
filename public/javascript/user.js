@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     loginContainer.style.display = "none";
                     userContainer.style.display = "block";
                 }
+                else {
+                    registerContainer.style.display = "none";
+                    loginContainer.style.display = "block";
+                    userContainer.style.display = "none";
+                }
                 userMenu.style.display = 'block'; // Pokaż menu
                 setTimeout(() => {
                     userMenu.style.opacity = 1; // Ustal przeźroczystość na 1
@@ -82,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
     });
+
     // Obsługa formularza rejestracji
     registerForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -114,3 +120,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+function logout() {
+    fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({}) // Pusty obiekt, możesz przesyłać dodatkowe informacje, jeśli potrzebujesz
+    })
+        .then(response => {
+            if (response.ok) {
+                localStorage.clear()
+                window.location.href = '/home'; // Przekieruj użytkownika np. do strony logowania
+            } else {
+                // Obsługa błędu wylogowania
+                console.error('Błąd podczas wylogowywania');
+            }
+        })
+        .catch(error => {
+            // Obsługa błędów sieciowych lub innych
+            console.error('Błąd sieciowy podczas wylogowywania', error);
+        });
+}

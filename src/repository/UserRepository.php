@@ -29,7 +29,7 @@ class UserRepository extends Repository
             $user['role']
         );
     }
-    public function registerUser(string $email, string $password, string $name, string $surname)
+    public function registerUser( $email,  $password,  $name,  $surname)
     {
         if ($this->userExists($email)) {
             return false; // Użytkownik już istnieje, zwróć false

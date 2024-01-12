@@ -21,11 +21,9 @@ class ProductController extends AppController
     public function shop() {
         $href = 'shop';
         session_start();
-        if(isset($_SESSION['user_id']))
+        if(isset($_SESSION['user_id']) and $_SESSION['role'] === 'admin')
         {
-            if($_SESSION['role'] === 'admin') {
-                $href = 'shop_admin';
-            }
+            header('Location: shop_admin');
         }
         $products = $this->productRepository->getProducts();
         $categories = $this->productRepository->getCategories();
@@ -35,20 +33,20 @@ class ProductController extends AppController
         ]);
     }
     public function shop_admin() {
-        $href = 'shop_admin';
         session_start();
-        if(isset($_SESSION['user_id']))
+        if(isset($_SESSION['user_id']) and $_SESSION['role'] === 'admin')
         {
-            if($_SESSION['role'] !== 'admin') {
-                $href = 'shop';
-            }
+            $href = 'shop_admin';
+            $products = $this->productRepository->getProducts();
+            $categories = $this->productRepository->getCategories();
+            $this->render($href, [
+                'products' => $products,
+                'categories' => $categories
+            ]);
         }
-        $products = $this->productRepository->getProducts();
-        $categories = $this->productRepository->getCategories();
-        $this->render($href, [
-            'products' => $products,
-            'categories' => $categories
-        ]);
+        else {
+            header('Location: shop');
+        }
     }
 
     public function addProduct(){
@@ -89,7 +87,8 @@ class ProductController extends AppController
             $this->productRepository->addProduct($product);
 
 
-            return $this->render('shop', [
+            header('Location: shop_admin');
+            return $this->render('shop_admin', [
                 'messages' => $this->messages,
                 'products' => $this->productRepository->getProducts(),
                 'categories' => $this->productRepository->getCategories()

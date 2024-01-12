@@ -14,8 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // dodawanie produktu
-document.getElementById('addProductButton').addEventListener('click', function () {
-    document.getElementById('addProductForm').style.display = 'block';
+const addProductButton = document.getElementById('addProductButton');
+const addProductForm = document.getElementById('addProductForm');
+addProductButton.addEventListener('click', function () {
+
+    const isFormVisible = addProductForm.style.display === 'block';
+    addProductForm.style.display = isFormVisible ? 'none' : 'block';
 });
 
 

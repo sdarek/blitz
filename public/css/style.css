@@ -1,0 +1,373 @@
+/* Resetowanie stylów */
+html, body, div, p, a, img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-family: "Lato-Bold", Helvetica;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Ustawienie obrazu tła na całą szerokość ekranu */
+.main-container {
+    background-image: url(../img/background.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    position: relative;
+}
+
+.main-container::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.5); /* Przyciemnione tło */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Wysunięte na tył */
+}
+/* Styl dla napisu głównego */
+
+.overlap-wrapper {
+    width: 100%;
+    height: 50vh; /* Połowa wysokości ekranu */
+    background: linear-gradient(rgba(21, 126, 158, 0.0), rgba(0, 0, 0, 0.8), rgba(21, 126, 158, 0.0)) center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.headline {
+    text-align: center;
+    font-size: 70px;
+    color: #fff; /* Biały kolor tekstu */
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.text-part-1 {
+    background-clip: text;
+    -webkit-background-clip: text;
+    display: inline-block;
+    font-size: 80px; /* Zwiększ rozmiar tekstu */
+    font-weight: bold; /* Dodaj większą wagę (grubszą czcionkę) */
+    letter-spacing: 10px; /* Dodaj większe odstępy między literami */
+}
+
+.text-part-2 {
+    background-clip: text;
+    -webkit-background-clip: text;
+    display: inline-block;
+    font-size: 60px; /* Zwiększ rozmiar tekstu */
+    letter-spacing: 1px; /* Dodaj większe odstępy między literami */
+}
+
+.scroll-down-icon {
+    text-align: center;
+    margin-top: 40px; /* Dostosuj margines, aby ustawić odstęp od tekstu */
+}
+
+.scroll-down-icon i {
+    font-size: 46px;
+    color: #fff; /* Kolor ikony */
+    animation: bounce 2s infinite; /* Dodaj animację bounce */
+    cursor: pointer;
+}
+
+/* Styl dla sekcji "Informacje" */
+#informacje {
+    background-color: #d6d8da;
+    padding: 50px;
+}
+
+.info-container {
+    text-align: justify;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.info-container h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.info-container p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: 20px;
+}
+/* Styl kontenera dla karuzeli produktów */
+.product-carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Styl kontenera dla pojedynczego produktu */
+.product-container {
+    flex: 0 0 33.33%; /* Każdy produkt zajmuje 33.33% szerokości (aby wyświetlić trzy obok siebie) */
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative; /* Dodaj pozycję względną, aby móc pozycjonować strzałki wewnątrz */
+}
+
+/* Styl obrazu produktu */
+.product-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Styl tytułu produktu */
+.product-container h3 {
+    margin: 10px 0;
+    font-size: 18px; /* Zwiększenie rozmiaru czcionki */
+}
+
+/* Styl opisu produktu */
+.product-container p {
+    font-size: 14px;
+}
+
+/* Styl dla strzałki "w lewo" */
+.left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: background-color 0.3s; /* Efekt zmiany koloru */
+}
+
+/* Styl dla strzałki "w prawo" */
+.right-arrow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: background-color 0.3s; /* Efekt zmiany koloru */
+}
+
+/* Zmiana koloru strzałek na hover */
+.left-arrow:hover,
+.right-arrow:hover {
+    background-color: #ff6600;
+}
+
+/* Aktualizacja stylów dla przycisku Witryna Sklepowa */
+.shop-button {
+    display: inline-block;
+    padding: 15px 30px; /* Zwiększenie rozmiaru przycisku */
+    background-color: #ff6600;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px; /* Zwiększenie rozmiaru czcionki */
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center; /* Wysrodkowanie tekstu */
+    margin: 0 auto; /* Centralizacja przycisku */
+    display: block; /* Aby zachować marginesy po bokach */
+    width: fit-content; /* Dostosowanie szerokości do zawartości */
+}
+
+.shop-button:hover {
+    background-color: #ff3300;
+}
+
+/* Styl dla sekcji "Kontakt" */
+#kontakt {
+    background-color: #0084a2;
+    color: #fff;
+    padding: 50px;
+}
+
+.contact-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-container h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.contact-container p {
+    font-size: 18px;
+}
+
+.contact-container form {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.contact-container form label {
+    display: block;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.contact-container form input,
+.contact-container form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.contact-container form button {
+    background-color: #fff;
+    color: #0084a2;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.contact-container form button:hover {
+    background-color: #555;
+    color: #fff;
+}
+/* Styl dla stopki */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.footer-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav li {
+    margin: 0 10px;
+}
+.footer-nav li:last-child {
+    margin-right: 0;
+}
+.footer-nav li:first-child {
+    margin-left: 0;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+}
+
+.footer-social {
+    margin-top: 15px;
+}
+
+.footer-social a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    margin: 0 10px;
+}
+.footer-social a:first-child {
+    margin-left: 0;
+}
+.footer-social a:last-child {
+    margin-right: 0;
+}
+
+.no-valid {
+    border: 3px solid red;
+    border-radius: 1em;
+    box-shadow: 0 0 0.2em red;
+    outline: none;
+}
+
+@media only screen and (max-width: 899px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .logo-text h1{
+        font-size: 50px;
+    }
+    .logo-text p{
+        font-size: 25px;
+    }
+    .footer-nav {
+        flex-direction: column;
+        font-size: 30px;
+        width: 100%;
+    }
+    .footer-nav li {
+        padding: 6px 0;
+        margin: 0;
+    }
+    .footer-nav li:hover {
+        background-color: #777777;
+    }
+    .footer-social {
+        margin: 0;
+    }
+    .footer-social a {
+        font-size: 34px;
+        margin: 0 20px;
+    }
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(10px); /* Skok w dół */
+    }
+    60% {
+        transform: translateY(5px); /* Skok w górę */
+    }
+}

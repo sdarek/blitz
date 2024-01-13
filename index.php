@@ -14,4 +14,5 @@ Routing::post('register', 'SecurityController');
 Routing::post('addProduct', 'ProductController');
 Routing::post('search', 'ProductController');
 Routing::get('searchByCategory', 'ProductController');
+Routing::post('addToCart', 'ProductController');
 Routing::run($path);

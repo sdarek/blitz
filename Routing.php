@@ -26,7 +26,8 @@ class Routing {
         $object = new $controller;
 
         $id = (int)$urlParts[1] ?? '';
-        $object->$action($id);
+        $quantity = (int)$urlParts[2] ?? '';
+        $object->$action($id, $quantity);
         
     }
 }

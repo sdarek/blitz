@@ -118,18 +118,23 @@ class ProductController extends AppController
         echo json_encode($result);
     }
 
-    public function addToCart()
+    public function addToCart($product_id, $quantity)
     {
         // Pobranie danych z formularza
-        $productId = $_POST['productId'];
-        $quantity = $_POST['quantity'];
-        $customerId = 1; // Zakładamy, że użytkownik o id 1 jest aktualnie zalogowany. Tutaj dostosuj do własnej autentykacji.
-
-        // Dodanie produktu do koszyka
-        $this->productRepository->addToShoppingCart($customerId, $productId, $quantity);
-
-        // Przekierowanie z powrotem do sklepu
-        header('Location: /shop');
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $product_id = intval($product_id);
+        $user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
+        if (!$product_id || !$user_id) {return;}
+        $quantity = !is_null($quantity) ? intval($quantity) : null;
+        $result = $this->productRepository->addToShoppingCart($product_id, $user_id, $quantity, false);
+        if($result){
+            header('Content-type: application/json');
+            http_response_code(200);
+            // var_dump($result);
+            echo json_encode($result);
+        }
     }
 
     public function viewCart()

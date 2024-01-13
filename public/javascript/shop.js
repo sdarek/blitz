@@ -87,13 +87,35 @@ categoryLinks.forEach(link => {
 });
 
 
-const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
+const addToCartElements = document.querySelectorAll('.add-to-cart');
 
-addToCartButtons.forEach(button => {
+addToCartElements.forEach(div => {
+    const button = div.querySelector('button');
+    const input = div.querySelector('input');
     button.addEventListener('click', function () {
-        const productId = button.getAttribute('data-product-id');
-
-        // Tutaj możesz dodać logikę dodawania produktu do koszyka
-        console.log(`Dodano produkt o ID ${productId} do koszyka.`);
+        console.log("aaaaa");
+        const productId = div.getAttribute('product_id');
+        const quantity = input.value; 
+        console.log(productId + " " + quantity);
+        fetch(`/addToCart/${productId}/${quantity}`, {
+            method: "POST"
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Błąd HTTP: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(response => {
+                // localStorage.add('')
+                // console.log("dodano do koszyka "+response);
+                 console.log(response[0].getCustomerid());
+                // productContainer.innerHTML = "";
+                // productHeader.innerHTML = categoryName.toUpperCase();
+                // loadProducts(products);
+            })
+            .catch(error => {
+                console.error("Błąd pobierania produktów:", error);
+            });
     });
 });

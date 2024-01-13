@@ -149,17 +149,48 @@ class ProductRepository extends Repository
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function addToShoppingCart(int $customerId, int $productId, int $quantity = 1)
+    public function addToShoppingCart(int $productId, int $userId, int $quantity, bool $isOrdered = false)
     {
-        $stmt = $this->database->connect()->prepare('
-            INSERT INTO public.shoppingcart (customerid, productid, quantity, isordered)
-            VALUES (?, ?, ?, FALSE)
-        ');
-        $stmt->execute([$customerId, $productId, $quantity]);
+        try {
+            $connection = $this->database->connect();
+            
+            // Wstawianie danych do koszyka
+            $insertStmt = $connection->prepare('
+                INSERT INTO public.shoppingcart (customerid, productid, quantity, isordered)
+                VALUES (:userId, :productId, :quantity, :isOrdered);
+            ');
+    
+            $insertStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $insertStmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+            $insertStmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+            $insertStmt->bindParam(':isOrdered', $isOrdered, PDO::PARAM_BOOL);
+    
+            $insertStmt->execute();
+    
+            // Pobieranie danych z koszyka
+            $selectStmt = $connection->prepare('
+                SELECT productid, quantity FROM public.shoppingcart WHERE customerid = :userId;
+            ');
+    
+            $selectStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $selectStmt->execute();
+            $cartProducts = $selectStmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $result ? $result['cartid'] : null;
+            $result = [];
+            foreach ($cartProducts as $cartProduct) {
+                $result[] = new ShoppingCart(
+                    $cartProduct['cartid'],
+                    $cartProduct['customerid'],
+                    $cartProduct['productid'],
+                    $cartProduct['quantity'],
+                    $cartProduct['isordered']
+                );
+            }
+            return $result ? $result : null;
+        } catch (PDOException $e) {
+            echo 'Wystąpił błąd podczas dodawania do koszyka: ' . $e->getMessage();
+            return null;
+        }
     }
 
     public function getShoppingCart(int $customerId): array

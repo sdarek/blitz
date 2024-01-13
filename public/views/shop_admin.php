@@ -172,9 +172,12 @@
                         <p class="description"><?= $product->getDescription(); ?></p>
                         <img src="public/uploads/<?= $product->getImage(); ?>" alt="Produkt 1">
                         <p class="product-price">Cena: <?= $product->getPrice(); ?>zł</p>
-                        <button class="add-to-cart-button" data-product-id="<?= $product->getId(); ?>">
-                            Dodaj do koszyka
-                        </button>
+                        <div class="add-to-cart" product_id="<?= $product->getId(); ?>">
+                            <input class="add-to-cart-input" type="number" name="quantity" placeholder="Ilość" value='1' min='1'></input>
+                            <button class="add-to-cart-button">
+                                Dodaj do koszyka
+                            </button>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>

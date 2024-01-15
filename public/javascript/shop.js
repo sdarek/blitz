@@ -54,7 +54,6 @@ function createProduct(product) {
 
     const divProductId = clone.querySelector(".add-to-cart");
     divProductId.setAttribute("product_id", product.productid);
-    console.log(divProductId.getAttribute("product_id"))
 
     productContainer.appendChild(clone);
 }
@@ -96,14 +95,11 @@ productContainer.addEventListener('click', function(event) {
 
     // Szukaj rodzica .add-to-cart, który zawiera kliknięty przycisk
     const div = target.closest('.add-to-cart');
-    console.log(target);
     if (div && target.classList.contains('add-to-cart-button')) {
         const button = div.querySelector('button');
         const input = div.querySelector('input');
         const productId = div.getAttribute('product_id');
         const quantity = input.value;
-
-        console.log(productId + " " + quantity);
 
         fetch(`/addToCart/${productId}/${quantity}`, {
             method: "POST"
@@ -116,9 +112,9 @@ productContainer.addEventListener('click', function(event) {
             })
             .then(response => {
                 displayMessage('Dodano produkt do koszyka!');
-                console.log(response[0].getCustomerId());
             })
             .catch(error => {
+                displayMessage("Zaloguj sie zeby dodac do koszyka");
                 console.error("Błąd dodawania do koszyka:", error);
             });
     }
@@ -128,10 +124,20 @@ function displayMessage(message) {
     const messageParagraph = messageDiv.querySelector('p');
     messageParagraph.innerText = message;
     messageDiv.style.display = 'block';
-    console.log(messageDiv.style.display);
 
     // Schowaj komunikat po pewnym czasie (np. 3 sekundy)
     setTimeout(() => {
         messageDiv.style.display = 'none';
     }, 2000);
 }
+
+
+const cartIcon = document.querySelector(".cart-icon");
+
+cartIcon.addEventListener('click', function(event) {
+    // Dodaj efekt rozwijania przy opuszczaniu strony
+    document.querySelector('#shopall').classList.add('page-leave-active');
+    setTimeout(() => {
+        window.location.href = 'cart'; // Przekierowanie do strony "shop.html"
+    }, 600); // Czas animacji (0.3s)
+});

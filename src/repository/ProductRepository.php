@@ -56,6 +56,36 @@ class ProductRepository extends Repository
 
         return $result;
     }
+    public function getShoppingCartDetails(int $customerId): array
+    {
+        $result = [];
+        $stmt = $this->database->connect()->prepare('
+            SELECT s.*, p.productname, p.price, p.description, p.categoryid, p.supplierid, p.image
+            FROM shoppingcart s
+            JOIN products p ON s.productid = p.productid
+            WHERE s.customerid = :customerid
+        ');
+        $stmt->bindParam(':customerid', $customerId, PDO::PARAM_INT);
+        $stmt->execute();
+        $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($cartItems as $cartItem) {
+            $result[] = [
+                'product' => new Product(
+                    $cartItem['productname'],
+                    $cartItem['price'],
+                    $cartItem['description'],
+                    $cartItem['categoryid'],
+                    $cartItem['supplierid'],
+                    $cartItem['image'],
+                    $cartItem['productid']
+                ),
+                'quantity' => $cartItem['quantity'] // Załóżmy, że ilość produktu jest przechowywana w kolumnie 'quantity'
+            ];
+        }
+
+        return $result;
+    }
 
 
     public function addProduct(Product $product) {

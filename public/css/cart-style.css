@@ -1,0 +1,166 @@
+/* Resetowanie stylów */
+html,
+body,
+div,
+p,
+a,
+img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-family: "Lato-Bold", Helvetica, serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Kontenery tła dla sekcji koszyka */
+.background-container {
+    background-image: url(../img/background-cart.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    position: relative;
+}
+
+/* Przyciemnione tło */
+.background-container::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* Styl dla sekcji koszyka */
+#cart .cart-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 0 auto;
+    color: #ffffff;
+    gap: 10%;
+    z-index: 2;
+}
+
+/* Kontener dla produktów w koszyku (po lewej) */
+#cart .cart-items-container {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    align-items: center;
+    text-align: center;
+    width: 60%;
+    box-shadow: 0 0 20px rgba(7, 98, 139, 0.8); /* Cień elementu koszyka */
+    border-radius: 10px;
+    overflow-y: auto; /* Dodana właściwość dla pionowego paska przewijania */
+    max-height: 600px; /* Maksymalna wysokość kontenera zanim pojawi się pasek przewijania */
+    scrollbar-width: thin; /* Dla Firefoksa */
+    scrollbar-color: #07628b white; /* Kolor paska i tła */
+}
+/* Dla przeglądarek opartych na silniku WebKit, takich jak Chrome/Safari */
+#cart .cart-items-container::-webkit-scrollbar {
+    width: 8px; /* Szerokość paska przewijania */
+}
+
+#cart .cart-items-container::-webkit-scrollbar-thumb {
+    background-color: #07628b; /* Kolor paska przewijania */
+}
+
+#cart .cart-items-container::-webkit-scrollbar-track {
+    background-color: white; /* Kolor tła paska przewijania */
+}
+
+#cart h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    background-color: #07628b;
+    border-bottom: white solid 1px;
+}
+
+.cart-item img {
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.item-details p {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+/* Kontener dla podsumowania koszyka (po prawej) */
+#cart .cart-summary-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    flex: 1;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    background-color: #07628b;
+    width: 30%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Cień elementu koszyka */
+    border-radius: 10px;
+    height: 320px;
+}
+
+.cart-summary-container .container {
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+    margin: 10px;
+}
+.cart-summary-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.cart-summary-container .container  p {
+    font-size: 1.2em;
+    margin-bottom: 12px;
+    color: #07628b;
+    font-weight: bold;
+
+}
+
+    /* Przycisk do zapłaty */
+#checkout-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#checkout-button:hover {
+    background-color: #45a049;
+}

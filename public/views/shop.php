@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 
 </head>
-<body>
+<body id="shopall">
     <section id="shop">
         <div class="main-container">
             <div class="menu-bar">
@@ -47,7 +47,6 @@
                         <div class="user-info">
                             <p>Email:  <?php echo $_SESSION['email']; ?></p>
                             <p>Rola: <?php echo $_SESSION['role']; ?></p>
-                            <!-- Dodaj inne informacje o użytkowniku, które chcesz wyświetlić -->
                         </div>
                         <button class="logout-btn" onclick="logout()">Wyloguj</button>
                     </div>
@@ -120,22 +119,24 @@
             </div>
         </section>
         <section id="product-sections">
-            <div class="product-section">
-                <h2 class="product-header">WSZYSTKIE PRODUKTY</h2>
-                <div class="product-carousel">
-                    <?php foreach ($products as $product): ?>
-                        <div class="product", id="<?= $product->getId(); ?>">
-                            <h3><?= $product->getName(); ?></h3>
-                            <p class="description"><?= $product->getDescription(); ?></p>
-                            <img src="public/uploads/<?= $product->getImage(); ?>" alt="Produkt 1">
-                            <p class="product-price">Cena: <?= $product->getPrice(); ?>zł</p>
-                            <button class="add-to-cart-button" data-product-id="<?= $product->getId(); ?>">
+            <h2 class="product-header">WSZYSTKIE PRODUKTY</h2>
+            <div class="product-carousel">
+                <?php foreach ($products as $product): ?>
+                    <div class="product", id="<?= $product->getId(); ?>">
+                        <h3><?= $product->getName(); ?></h3>
+                        <p class="description"><?= $product->getDescription(); ?></p>
+                        <img src="public/uploads/<?= $product->getImage(); ?>" alt="Produkt 1">
+                        <p class="product-price">Cena: <?= $product->getPrice(); ?>zł</p>
+                        <div class="add-to-cart" product_id="<?= $product->getId(); ?>">
+                            <input class="add-to-cart-input" type="number" name="quantity" placeholder="Ilość" value='1' min='1'>
+                            <button class="add-to-cart-button">
                                 Dodaj do koszyka
                             </button>
                         </div>
-                    <?php endforeach; ?>
-                </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
+            <div id="message-container"><p>mhm</p></div>
         </section>
     </main>
 
@@ -153,8 +154,11 @@
         <p class="description">opis</p>
         <img src="" alt="Produkt">
         <p class="product-price">Cena</p>
-        <button class="add-to-cart-button" data-product-id="">
-            Dodaj do koszyka
-        </button>
+        <div class="add-to-cart" product_id="">
+            <input class="add-to-cart-input" type="number" name="quantity" placeholder="Ilość" value='1' min='1'>
+            <button class="add-to-cart-button">
+                Dodaj do koszyka
+            </button>
+        </div>
     </div>
 </template>

@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Blitz - Strona Główna</title>
     <meta name="description" content="Opis...................."/>
-    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/cart-style.css">
     <link rel="stylesheet" type="text/css" href="public/css/menu.css">
     <link rel="stylesheet" type="text/css" href="public/css/effects.css">
-    <script src="public/javascript/menu.js" defer>></script>
-    <script type="text/javascript" src="./public/javascript/script.js" defer></script>
-    <script src="public/javascript/home.js" defer></script>
+    <script src="public/javascript/menu.js" defer></script>
     <script src="public/javascript/user.js" defer></script>
+    <script src="public/javascript/cart.js" defer></script>
+    <script type="text/javascript" src="./public/javascript/script.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 
 </head>
-<body>
+<body class="cart">
 <section id="home">
     <div class="main-container">
         <div class="menu-bar">
@@ -35,7 +35,7 @@
             <div class="menu-center">
                 <div class="nav-links">
                     <a class="nav-link" href="#home">HOME</a>
-                    <a class="nav-link" href="shop.php">SKLEP</a>
+                    <a class="nav-link" href="shop">SKLEP</a>
                     <a class="nav-link" href="#informacje">INFORMACJE</a>
                     <a class="nav-link" href="#kontakt">KONTAKT</a>
                 </div>
@@ -126,32 +126,47 @@
         </nav>
     </div>
 </section>
-<section id="cart">
+<section id="cart" class="background-container">
     <div class="cart-container">
-        <h1>Koszyk Zakupowy</h1>
-        <div class="cart-items">
-            <!-- Tutaj będą wyświetlane wszystkie produkty w koszyku -->
-            <!-- Dla każdego produktu dodaj element z informacjami: zdjęcie, ilość, cena -->
-            <div class="cart-item">
-                <img src="public/uploads/product1.jpg" alt="Product 1">
-                <div class="item-details">
-                    <p>Ilość: 2</p>
-                    <p>Cena: $20</p>
+
+        <!-- Kontener dla produktów w koszyku (po lewej) -->
+        <div class="cart-items-container">
+
+            <h1>Koszyk Zakupowy</h1>
+            <div class="cart-items">
+                <?php foreach ($cartItems as $cartItem): ?>
+                <div class="cart-item">
+                    <img src="public/uploads/<?= $cartItem['product']->getImage();?>" alt="Product 1">
+                    <div class="item-details">
+                        <p><?= $cartItem['product']->getName();?></p>
+                        <p>Ilość: <?= $cartItem['quantity']?></p>
+                        <p>Cena: <?= $cartItem['product']->getPrice() * $cartItem['quantity'];?>zł</p>
+                    </div>
                 </div>
+                <?php endforeach; ?>
             </div>
-
-            <!-- Dodaj kolejne elementy w podobny sposób -->
-
         </div>
 
-        <!-- Podsumowanie koszyka -->
-        <div class="cart-summary">
+        <!-- Kontener dla podsumowania koszyka (po prawej) -->
+        <div class="cart-summary-container">
             <h2>Podsumowanie</h2>
-            <p>Liczba produktów: 3</p>
-            <p>Łączna kwota: $60</p>
+            <div class="container">
+                <?php
+                // Obliczenia dotyczące liczby produktów i łącznej kwoty
+                $totalProducts = count($cartItems);
+                $totalPrice = 0;
 
-            <!-- Przycisk do zapłaty -->
-            <button id="checkout-button">Zapłać</button>
+                foreach ($cartItems as $cartItem) {
+                    $totalPrice += $cartItem['product']->getPrice() * $cartItem['quantity'];
+                }
+                ?>
+
+                <p>Liczba produktów: <?= $totalProducts; ?></p>
+                <p>Łączna kwota: <?= $totalPrice; ?>zł</p>
+
+                <!-- Przycisk do zapłaty -->
+                <button id="checkout-button">Zapłać</button>
+            </div>
         </div>
     </div>
 </section>

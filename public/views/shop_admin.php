@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 
 </head>
-<body>
+<body id="shopall">
 <section id="shop">
     <div class="main-container">
         <div class="menu-bar">
@@ -164,7 +164,6 @@
 
         <div class="product-section">
             <h2 class="product-header">WSZYSTKIE PRODUKTY</h2>
-            <div id="message-container"><p>mhm</p></div>
             <div class="product-carousel">
                 <?php foreach ($products as $product): ?>
                     <div class="product", id="<?= $product->getId(); ?>">
@@ -173,7 +172,7 @@
                         <img src="public/uploads/<?= $product->getImage(); ?>" alt="Produkt 1">
                         <p class="product-price">Cena: <?= $product->getPrice(); ?>zł</p>
                         <div class="add-to-cart" product_id="<?= $product->getId(); ?>">
-                            <input class="add-to-cart-input" type="number" name="quantity" placeholder="Ilość" value='1' min='1'></input>
+                            <input class="add-to-cart-input" type="number" name="quantity" placeholder="Ilość" value='1' min='1'>
                             <button class="add-to-cart-button">
                                 Dodaj do koszyka
                             </button>
@@ -181,6 +180,7 @@
                     </div>
                 <?php endforeach; ?>
             </div>
+            <div id="message-container"><p>mhm</p></div>
         </div>
     </section>
 </main>

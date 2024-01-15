@@ -16,34 +16,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const userMenu = document.getElementById('user-menu');
     const showLogin = document.querySelector("#showLogin");
     const userIcon = document.querySelector(".user-icon");
-    
+
         
-        let isUserMenuVisible = false;
-        userIcon.addEventListener('click', () => {
-            if (isUserMenuVisible) {
-                userMenu.style.opacity = 0; // Schowaj menu
-                setTimeout(() => {
-                    userMenu.style.display = 'none'; // Ukryj menu
-                }, 300); // Czas animacji (0.3s)
-            } else {
-                if(localStorage.getItem('user_id')) {
-                    registerContainer.style.display = "none";
-                    loginContainer.style.display = "none";
-                    userContainer.style.display = "block";
-                }
-                else {
-                    registerContainer.style.display = "none";
-                    loginContainer.style.display = "block";
-                    userContainer.style.display = "none";
-                }
-                userMenu.style.display = 'block'; // Pokaż menu
-                setTimeout(() => {
-                    userMenu.style.opacity = 1; // Ustal przeźroczystość na 1
-                }, 0);
+    let isUserMenuVisible = false;
+    userIcon.addEventListener('click', () => {
+        if (isUserMenuVisible) {
+            userMenu.style.opacity = 0; // Schowaj menu
+            setTimeout(() => {
+                userMenu.style.display = 'none'; // Ukryj menu
+            }, 300); // Czas animacji (0.3s)
+        } else {
+            if(localStorage.getItem('user_id')) {
+                registerContainer.style.display = "none";
+                loginContainer.style.display = "none";
+                userContainer.style.display = "block";
             }
-    
-            isUserMenuVisible = !isUserMenuVisible;
-        });
+            else {
+                registerContainer.style.display = "none";
+                loginContainer.style.display = "block";
+                userContainer.style.display = "none";
+            }
+            userMenu.style.display = 'block'; // Pokaż menu
+            setTimeout(() => {
+                userMenu.style.opacity = 1; // Ustal przeźroczystość na 1
+            }, 0);
+        }
+
+        isUserMenuVisible = !isUserMenuVisible;
+    });
+
     // Obsługa kliknięcia "Zarejestruj się" - przełączenie do formularza rejestracji
     showRegisterLink.addEventListener('click', function(event){
         event.preventDefault();

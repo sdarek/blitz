@@ -3,6 +3,7 @@
 const navLinks = document.querySelectorAll('.nav-link');
 const mobileLinks = document.querySelectorAll('.mobile-link');
 
+
 // Dla każdego przycisku nawigacyjnego dodaj obsługę zdarzenia kliknięcia
 navLinks.forEach(link => {
     link.addEventListener('click', scrollToSection);
@@ -71,3 +72,14 @@ shopMobileButton.addEventListener('click', () => {
     }, 300); // Czas animacji (0.3s)
 });
 
+
+
+const cartIcon = document.querySelector(".cart-icon");
+
+cartIcon.addEventListener('click', function(event) {
+    // Dodaj efekt rozwijania przy opuszczaniu strony
+    document.querySelector('.homeall').classList.add('page-leave-active');
+    setTimeout(() => {
+        window.location.href = 'cart'; // Przekierowanie do strony "shop.html"
+    }, 600); // Czas animacji (0.3s)
+});

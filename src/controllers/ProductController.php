@@ -2,6 +2,7 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../models/Product.php';
+require_once __DIR__.'/../models/ShoppingCart.php';
 require_once __DIR__.'/../repository/ProductRepository.php';
 
 class ProductController extends AppController
@@ -46,6 +47,18 @@ class ProductController extends AppController
         }
         else {
             header('Location: shop');
+        }
+    }
+    public function cart() {
+        session_start();
+        if(isset($_SESSION['user_id']))
+        {
+            $userId = $_SESSION['user_id'];
+
+            $cartItems = $this->productRepository->getShoppingCartDetails($userId);
+            $this->render('cart', [
+                'cartItems' => $cartItems
+            ]);
         }
     }
 
@@ -126,7 +139,17 @@ class ProductController extends AppController
         }
         $product_id = intval($product_id);
         $user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
-        if (!$product_id || !$user_id) {return;}
+        if (!$product_id || !$user_id) {
+            $response = [
+                'error' => 'Użytkownik niezalogowany',
+                'message' => 'Zaloguj sie zeby uzyskac dostep do koszyka'
+            ];
+
+            header('Content-type: application/json');
+            http_response_code(401);
+            echo json_encode($response);
+            return;
+        }
         $quantity = !is_null($quantity) ? intval($quantity) : null;
         $result = $this->productRepository->addToShoppingCart($product_id, $user_id, $quantity, false);
         if($result){

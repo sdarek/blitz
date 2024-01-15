@@ -48,7 +48,6 @@
                     <div class="user-info">
                         <p>Email:  <?php echo $_SESSION['email']; ?></p>
                         <p>Rola: <?php echo $_SESSION['role']; ?></p>
-                        <!-- Dodaj inne informacje o użytkowniku, które chcesz wyświetlić -->
                     </div>
                     <button class="logout-btn" onclick="logout()">Wyloguj</button>
                 </div>
@@ -165,6 +164,7 @@
 
         <div class="product-section">
             <h2 class="product-header">WSZYSTKIE PRODUKTY</h2>
+            <div id="message-container"><p>mhm</p></div>
             <div class="product-carousel">
                 <?php foreach ($products as $product): ?>
                     <div class="product", id="<?= $product->getId(); ?>">
@@ -199,8 +199,11 @@
         <p class="description">opis</p>
         <img src="" alt="Produkt">
         <p class="product-price">Cena</p>
-        <button class="add-to-cart-button" data-product-id="">
-            Dodaj do koszyka
-        </button>
+        <div class="add-to-cart" product_id="">
+            <input class="add-to-cart-input" type="number" name="quantity" placeholder="Ilość" value='1' min='1'>
+            <button class="add-to-cart-button">
+                Dodaj do koszyka
+            </button>
+        </div>
     </div>
 </template>

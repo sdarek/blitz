@@ -24,6 +24,7 @@ search.addEventListener("keyup", function(event) {
             return response.json();
         }).then(function(products) {
             productContainer.innerHTML = "";
+            productContainer.innerHTML = '<div id="message-container"><p>mhm</p></div>'
             loadProducts(products);
         });
     }
@@ -51,8 +52,9 @@ function createProduct(product) {
     const productPrice = clone.querySelector(".product-price");
     productPrice.innerHTML = "Cena: " + product.price + 'zł';
 
-    const dataProductId = clone.querySelector("button");
-    dataProductId.setAttribute("data-product-id", product.productid);
+    const divProductId = clone.querySelector(".add-to-cart");
+    divProductId.setAttribute("product_id", product.productid);
+    console.log(divProductId.getAttribute("product_id"))
 
     productContainer.appendChild(clone);
 }
@@ -87,16 +89,22 @@ categoryLinks.forEach(link => {
 });
 
 
-const addToCartElements = document.querySelectorAll('.add-to-cart');
 
-addToCartElements.forEach(div => {
-    const button = div.querySelector('button');
-    const input = div.querySelector('input');
-    button.addEventListener('click', function () {
-        console.log("aaaaa");
+const messageDiv = document.getElementById('message-container');
+productContainer.addEventListener('click', function(event) {
+    const target = event.target;
+
+    // Szukaj rodzica .add-to-cart, który zawiera kliknięty przycisk
+    const div = target.closest('.add-to-cart');
+    console.log(target);
+    if (div && target.classList.contains('add-to-cart-button')) {
+        const button = div.querySelector('button');
+        const input = div.querySelector('input');
         const productId = div.getAttribute('product_id');
-        const quantity = input.value; 
+        const quantity = input.value;
+
         console.log(productId + " " + quantity);
+
         fetch(`/addToCart/${productId}/${quantity}`, {
             method: "POST"
         })
@@ -107,15 +115,23 @@ addToCartElements.forEach(div => {
                 return response.json();
             })
             .then(response => {
-                // localStorage.add('')
-                // console.log("dodano do koszyka "+response);
-                 console.log(response[0].getCustomerid());
-                // productContainer.innerHTML = "";
-                // productHeader.innerHTML = categoryName.toUpperCase();
-                // loadProducts(products);
+                displayMessage('Dodano produkt do koszyka!');
+                console.log(response[0].getCustomerId());
             })
             .catch(error => {
-                console.error("Błąd pobierania produktów:", error);
+                console.error("Błąd dodawania do koszyka:", error);
             });
-    });
+    }
 });
+
+function displayMessage(message) {
+    const messageParagraph = messageDiv.querySelector('p');
+    messageParagraph.innerText = message;
+    messageDiv.style.display = 'block';
+    console.log(messageDiv.style.display);
+
+    // Schowaj komunikat po pewnym czasie (np. 3 sekundy)
+    setTimeout(() => {
+        messageDiv.style.display = 'none';
+    }, 2000);
+}

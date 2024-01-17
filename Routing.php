@@ -16,7 +16,11 @@ class Routing {
 
     public static function run($url) {
         $urlParts = explode("/", $url);
-        $action = $urlParts[0];
+        $i = 0;
+        if ($urlParts[1] == "updateCartItem") {
+            $i++;
+        }
+        $action = $urlParts[$i];
 
         if(!array_key_exists($action, self::$routes)) {
             die("Wrong url!");
@@ -24,9 +28,9 @@ class Routing {
 
         $controller = self::$routes[$action];
         $object = new $controller;
+        $id = (int)$urlParts[$i+1] ?? '';
+        $quantity = intval($urlParts[$i+2] ?? '');
 
-        $id = (int)$urlParts[1] ?? '';
-        $quantity = (int)$urlParts[2] ?? '';
         $object->$action($id, $quantity);
         
     }

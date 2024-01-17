@@ -32,7 +32,6 @@ search.addEventListener("keyup", function(event) {
 
 function loadProducts(products) {
     products.forEach(product => {
-        // console.log(product);
         createProduct(product);
     })
 }
@@ -125,7 +124,6 @@ function displayMessage(message) {
     messageParagraph.innerText = message;
     messageDiv.style.display = 'block';
 
-    // Schowaj komunikat po pewnym czasie (np. 3 sekundy)
     setTimeout(() => {
         messageDiv.style.display = 'none';
     }, 2000);
@@ -135,9 +133,9 @@ function displayMessage(message) {
 const cartIcon = document.querySelector(".cart-icon");
 
 cartIcon.addEventListener('click', function(event) {
-    // Dodaj efekt rozwijania przy opuszczaniu strony
+    // efekt rozwijania przy opuszczaniu strony
     document.querySelector('#shopall').classList.add('page-leave-active');
     setTimeout(() => {
-        window.location.href = 'cart'; // Przekierowanie do strony "shop.html"
-    }, 600); // Czas animacji (0.3s)
+        window.location.href = 'cart';
+    }, 600); // Czas animacji
 });

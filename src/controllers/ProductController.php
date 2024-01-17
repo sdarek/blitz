@@ -172,17 +172,11 @@ class ProductController extends AppController
         ]);
     }
 
-    public function updateCartItem()
+    public function updateCartItem($cartId, $quantity)
     {
-        // Pobranie danych z formularza
-        $cartId = $_POST['cartId'];
-        $quantity = $_POST['quantity'];
-
         // Aktualizacja ilości w koszyku
         $this->productRepository->updateShoppingCartItem($cartId, $quantity);
-
-        // Przekierowanie z powrotem do widoku koszyka
-        header('Location: /cart');
+        http_response_code(200);
     }
 
     public function removeCartItem()

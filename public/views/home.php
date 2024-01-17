@@ -149,21 +149,19 @@
 
             <div class="product-carousel">
                 <div class="product-container">
-                    <div class="left-arrow arrow" onclick="showPrevProduct()">&#9665;</div>
                     <img src="public/img/placeholder-image1.jpg" alt="Produkt 1">
                     <h3>Produkt 1</h3>
                     <p>Opis produktu 1.</p>
                 </div>
                 <div class="product-container">
                     <img src="public/img/placeholder-image1.jpg" alt="Produkt 1">
-                    <h3>Produkt 1</h3>
-                    <p>Opis produktu 1.</p>
+                    <h3>Produkt 2</h3>
+                    <p>Opis produktu 2.</p>
                 </div>
                 <div class="product-container">
                     <img src="public/img/placeholder-image1.jpg" alt="Produkt 1">
-                    <h3>Produkt 1</h3>
-                    <p>Opis produktu 1.</p>
-                    <div class="right-arrow arrow" onclick="showNextProduct()">&#9655;</div>
+                    <h3>Produkt 3</h3>
+                    <p>Opis produktu 3.</p>
                 </div>
             </div>
             <p>Nunc sed convallis nulla, eget viverra sapien. Pellentesque cursus aliquam odio vitae accumsan. Nunc nec molestie nisi. Mauris commodo felis et ante volutpat mattis. Pellentesque nisi arcu, scelerisque ut enim eu, scelerisque faucibus libero. Vestibulum malesuada neque vehicula enim pellentesque, cursus ultrices massa lobortis. Vivamus venenatis eros ut diam sagittis ultrices. Nullam non purus id nulla sodales eleifend eu non mauris.</p>

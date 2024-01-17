@@ -139,8 +139,12 @@
                     <img src="public/uploads/<?= $cartItem['product']->getImage();?>" alt="Product 1">
                     <div class="item-details">
                         <p><?= $cartItem['product']->getName();?></p>
-                        <p>Ilość: <?= $cartItem['quantity']?></p>
-                        <p>Cena: <?= $cartItem['product']->getPrice() * $cartItem['quantity'];?>zł</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus-btn" onclick="updateQuantity('<?= $cartItem['cart']->getCartid();?>', 'minus', <?= $cartItem['product']->getPrice();?>)">-</button>
+                            <p id="quantity-<?= $cartItem['cart']->getCartid();?>" class="quantity">Ilość: <?= $cartItem['cart']->getQuantity()?></p>
+                            <button class="quantity-btn plus-btn" onclick="updateQuantity('<?= $cartItem['cart']->getCartid();?>', 'plus', <?= $cartItem['product']->getPrice();?>)">+</button>
+                        </div>
+                        <p id="price-<?= $cartItem['cart']->getCartid();?>">Cena: <?= $cartItem['product']->getPrice() * $cartItem['cart']->getQuantity();?>zł</p>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -157,12 +161,12 @@
                 $totalPrice = 0;
 
                 foreach ($cartItems as $cartItem) {
-                    $totalPrice += $cartItem['product']->getPrice() * $cartItem['quantity'];
+                    $totalPrice += $cartItem['product']->getPrice() * $cartItem['cart']->getQuantity();
                 }
                 ?>
 
                 <p>Liczba produktów: <?= $totalProducts; ?></p>
-                <p>Łączna kwota: <?= $totalPrice; ?>zł</p>
+                <p id="summary-price">Łączna kwota: <?= $totalPrice; ?>zł</p>
 
                 <!-- Przycisk do zapłaty -->
                 <button id="checkout-button">Zapłać</button>

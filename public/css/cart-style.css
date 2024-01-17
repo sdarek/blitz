@@ -115,6 +115,32 @@ img {
     color: #fff;
 }
 
+.item-details .quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 1em;
+    margin: 0 5px;
+}
+
+.quantity-btn:hover {
+    background-color: #45a049;
+}
+
+.quantity {
+    font-size: 1.2em;
+    margin: 0 5px;
+    color: #333;
+}
+
+
 /* Kontener dla podsumowania koszyka (po prawej) */
 #cart .cart-summary-container {
     display: flex;
@@ -164,3 +190,4 @@ img {
 #checkout-button:hover {
     background-color: #45a049;
 }
+

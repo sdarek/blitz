@@ -4,7 +4,7 @@ html, body, div, p, a, img {
     padding: 0;
     border: 0;
     font: inherit;
-    font-family: "Lato-Bold", Helvetica;
+    font-family: "Lato-Bold", Helvetica, serif;
     text-decoration: none;
     list-style: none;
 }
@@ -26,16 +26,15 @@ html, body, div, p, a, img {
 
 .main-container::before {
     content: "";
-    background: rgba(0, 0, 0, 0.5); /* Przyciemnione tło */
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1; /* Wysunięte na tył */
+    z-index: -1;
 }
 /* Styl dla napisu głównego */
-
 .overlap-wrapper {
     width: 100%;
     height: 50vh; /* Połowa wysokości ekranu */
@@ -46,11 +45,10 @@ html, body, div, p, a, img {
     align-items: center;
     text-align: center;
 }
-
 .headline {
     text-align: center;
     font-size: 70px;
-    color: #fff; /* Biały kolor tekstu */
+    color: #fff;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -58,27 +56,27 @@ html, body, div, p, a, img {
     background-clip: text;
     -webkit-background-clip: text;
     display: inline-block;
-    font-size: 80px; /* Zwiększ rozmiar tekstu */
-    font-weight: bold; /* Dodaj większą wagę (grubszą czcionkę) */
-    letter-spacing: 10px; /* Dodaj większe odstępy między literami */
+    font-size: 80px;
+    font-weight: bold; /
+    letter-spacing: 10px;
 }
 
 .text-part-2 {
     background-clip: text;
     -webkit-background-clip: text;
     display: inline-block;
-    font-size: 60px; /* Zwiększ rozmiar tekstu */
-    letter-spacing: 1px; /* Dodaj większe odstępy między literami */
+    font-size: 60px;
+    letter-spacing: 1px;
 }
 
 .scroll-down-icon {
     text-align: center;
-    margin-top: 40px; /* Dostosuj margines, aby ustawić odstęp od tekstu */
+    margin-top: 40px;
 }
 
 .scroll-down-icon i {
     font-size: 46px;
-    color: #fff; /* Kolor ikony */
+    color: #fff;
     animation: bounce 2s infinite; /* Dodaj animację bounce */
     cursor: pointer;
 }
@@ -118,11 +116,11 @@ html, body, div, p, a, img {
 
 /* Styl kontenera dla pojedynczego produktu */
 .product-container {
-    flex: 0 0 33.33%; /* Każdy produkt zajmuje 33.33% szerokości (aby wyświetlić trzy obok siebie) */
+    flex: 0 0 33.33%;
     padding: 10px;
     box-sizing: border-box;
     text-align: center;
-    position: relative; /* Dodaj pozycję względną, aby móc pozycjonować strzałki wewnątrz */
+    position: relative;
 }
 
 /* Styl obrazu produktu */
@@ -134,54 +132,12 @@ html, body, div, p, a, img {
 /* Styl tytułu produktu */
 .product-container h3 {
     margin: 10px 0;
-    font-size: 18px; /* Zwiększenie rozmiaru czcionki */
+    font-size: 18px;
 }
 
 /* Styl opisu produktu */
 .product-container p {
     font-size: 14px;
-}
-
-/* Styl dla strzałki "w lewo" */
-.left-arrow {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    line-height: 40px;
-    cursor: pointer;
-    font-size: 20px;
-    border-radius: 50%;
-    transition: background-color 0.3s; /* Efekt zmiany koloru */
-}
-
-/* Styl dla strzałki "w prawo" */
-.right-arrow {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    line-height: 40px;
-    cursor: pointer;
-    font-size: 20px;
-    border-radius: 50%;
-    transition: background-color 0.3s; /* Efekt zmiany koloru */
-}
-
-/* Zmiana koloru strzałek na hover */
-.left-arrow:hover,
-.right-arrow:hover {
-    background-color: #ff6600;
 }
 
 /* Aktualizacja stylów dla przycisku Witryna Sklepowa */

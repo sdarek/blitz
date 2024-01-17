@@ -58,13 +58,34 @@ class ProductRepository extends Repository
     }
     public function getShoppingCartDetails(int $customerId): array
     {
+        // Aktualizacja ilości dla produktów w koszyku (zmniejszenie do 0, jeśli quantity == 0)
+        $updateStmt = $this->database->connect()->prepare('
+        UPDATE shoppingcart 
+        SET quantity = CASE WHEN quantity = 0 THEN 0 ELSE quantity END
+        WHERE customerid = :customerid;
+    ');
+
+        $updateStmt->bindParam(':customerid', $customerId, PDO::PARAM_INT);
+        $updateStmt->execute();
+
+        // Usunięcie rekordów, których ilość wynosi 0
+        $deleteStmt = $this->database->connect()->prepare('
+        DELETE FROM shoppingcart 
+        WHERE customerid = :customerid AND quantity = 0;
+    ');
+
+        $deleteStmt->bindParam(':customerid', $customerId, PDO::PARAM_INT);
+        $deleteStmt->execute();
+
+        // Pobranie danych z koszyka (zaktualizowanych po ewentualnym usunięciu)
         $result = [];
         $stmt = $this->database->connect()->prepare('
-            SELECT s.*, p.productname, p.price, p.description, p.categoryid, p.supplierid, p.image
-            FROM shoppingcart s
-            JOIN products p ON s.productid = p.productid
-            WHERE s.customerid = :customerid
-        ');
+        SELECT s.*, p.productname, p.price, p.description, p.categoryid, p.supplierid, p.image
+        FROM shoppingcart s
+        JOIN products p ON s.productid = p.productid
+        WHERE s.customerid = :customerid;
+    ');
+
         $stmt->bindParam(':customerid', $customerId, PDO::PARAM_INT);
         $stmt->execute();
         $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -80,12 +101,19 @@ class ProductRepository extends Repository
                     $cartItem['image'],
                     $cartItem['productid']
                 ),
-                'quantity' => $cartItem['quantity'] // Załóżmy, że ilość produktu jest przechowywana w kolumnie 'quantity'
+                'cart' => new ShoppingCart(
+                    $cartItem['cartid'],
+                    $cartItem['customerid'],
+                    $cartItem['productid'],
+                    $cartItem['quantity'],
+                    $cartItem['isordered']
+                )
             ];
         }
 
         return $result;
     }
+
 
 
     public function addProduct(Product $product) {
@@ -183,25 +211,48 @@ class ProductRepository extends Repository
     {
         try {
             $connection = $this->database->connect();
-            
-            // Wstawianie danych do koszyka
-            $insertStmt = $connection->prepare('
+
+            // Sprawdzenie, czy produkt już istnieje w koszyku
+            $checkStmt = $connection->prepare('
+            SELECT cartid, quantity FROM public.shoppingcart 
+            WHERE customerid = :userId AND productid = :productId;
+        ');
+
+            $checkStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $checkStmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+            $checkStmt->execute();
+            $existingCartItem = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($existingCartItem) {
+                // Produkt istnieje w koszyku, zaktualizuj ilość
+                $updateStmt = $connection->prepare('
+                UPDATE public.shoppingcart 
+                SET quantity = quantity + :quantity 
+                WHERE cartid = :cartId;
+            ');
+
+                $updateStmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+                $updateStmt->bindParam(':cartId', $existingCartItem['cartid'], PDO::PARAM_INT);
+                $updateStmt->execute();
+            } else {
+                // Produkt nie istnieje w koszyku, dodaj nowy
+                $insertStmt = $connection->prepare('
                 INSERT INTO public.shoppingcart (customerid, productid, quantity, isordered)
                 VALUES (:userId, :productId, :quantity, :isOrdered);
             ');
-    
-            $insertStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-            $insertStmt->bindParam(':productId', $productId, PDO::PARAM_INT);
-            $insertStmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-            $insertStmt->bindParam(':isOrdered', $isOrdered, PDO::PARAM_BOOL);
-    
-            $insertStmt->execute();
-    
-            // Pobieranie danych z koszyka
+
+                $insertStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+                $insertStmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+                $insertStmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+                $insertStmt->bindParam(':isOrdered', $isOrdered, PDO::PARAM_BOOL);
+                $insertStmt->execute();
+            }
+
+            // Pobranie zaktualizowanych danych z koszyka
             $selectStmt = $connection->prepare('
-                SELECT productid, quantity FROM public.shoppingcart WHERE customerid = :userId;
-            ');
-    
+            SELECT * FROM public.shoppingcart WHERE customerid = :userId;
+        ');
+
             $selectStmt->bindParam(':userId', $userId, PDO::PARAM_INT);
             $selectStmt->execute();
             $cartProducts = $selectStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -216,12 +267,14 @@ class ProductRepository extends Repository
                     $cartProduct['isordered']
                 );
             }
+
             return $result ? $result : null;
         } catch (PDOException $e) {
             echo 'Wystąpił błąd podczas dodawania do koszyka: ' . $e->getMessage();
             return null;
         }
     }
+
 
     public function getShoppingCart(int $customerId): array
     {
@@ -244,15 +297,21 @@ class ProductRepository extends Repository
 
         return $result;
     }
-    public function updateShoppingCartItem(int $cartId, int $quantity = 1)
+    public function updateShoppingCartItem(int $cartId, int $quantity)
     {
-        $stmt = $this->database->connect()->prepare('
-            UPDATE public.shoppingcart
-            SET quantity = ?
-            WHERE cartid = ?
+        $updateStmt = $this->database->connect()->prepare('
+            UPDATE public.shoppingcart 
+            SET quantity = CASE WHEN quantity + :quantity >= 0 THEN quantity + :quantity ELSE 0 END
+            WHERE cartid = :cartId;
         ');
-        $stmt->execute([$quantity, $cartId]);
+
+
+        $updateStmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+        $updateStmt->bindParam(':cartId', $cartId, PDO::PARAM_INT);
+        $updateStmt->execute();
     }
+
+
     public function removeShoppingCartItem(int $cartId)
     {
         $stmt = $this->database->connect()->prepare('
